@@ -378,36 +378,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#scenario" title="Scenario" class="md-nav__link">
-    Scenario
+  <a href="#_1" title="シナリオ" class="md-nav__link">
+    シナリオ
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture" title="Architecture" class="md-nav__link">
-    Architecture
+  <a href="#_2" title="アーキテクチャ" class="md-nav__link">
+    アーキテクチャ
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#presentation-deck" title="Presentation deck" class="md-nav__link">
-    Presentation deck
+  <a href="#_3" title="プレゼンテーションデッキ" class="md-nav__link">
+    プレゼンテーションデッキ
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#region" title="Region" class="md-nav__link">
-    Region
+  <a href="#_4" title="リージョン" class="md-nav__link">
+    リージョン
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#modules" title="Modules" class="md-nav__link">
-    Modules
+  <a href="#_5" title="モジュール" class="md-nav__link">
+    モジュール
   </a>
   
 </li>
@@ -516,36 +516,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#scenario" title="Scenario" class="md-nav__link">
-    Scenario
+  <a href="#_1" title="シナリオ" class="md-nav__link">
+    シナリオ
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture" title="Architecture" class="md-nav__link">
-    Architecture
+  <a href="#_2" title="アーキテクチャ" class="md-nav__link">
+    アーキテクチャ
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#presentation-deck" title="Presentation deck" class="md-nav__link">
-    Presentation deck
+  <a href="#_3" title="プレゼンテーションデッキ" class="md-nav__link">
+    プレゼンテーションデッキ
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#region" title="Region" class="md-nav__link">
-    Region
+  <a href="#_4" title="リージョン" class="md-nav__link">
+    リージョン
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#modules" title="Modules" class="md-nav__link">
-    Modules
+  <a href="#_5" title="モジュール" class="md-nav__link">
+    モジュール
   </a>
   
 </li>
@@ -570,32 +570,31 @@
                 
                 
                 <h1 id="overview">Overview</h1>
-<p>This workshop is designed to help you get familiar with AWS Security services and learn how to use them to identify and remediate threats in your environment.  You'll be working with services such as Amazon GuardDuty, Amazon Macie, Amazon Inspector, AWS Security Hub. You will learn how to use these services to investigate threats during and after an attack, set up a notification and response pipeline, and  add additional protections to improve the security posture of your environment.</p>
+<p>このワークショップは、AWS セキュリティサービスを理解し、そのサービスを使用して貴社環境の脅威を識別および修復する方法を学習する手助けとなるように設計されています。Amazon GuardDuty、Amazon Macie、Amazon Inspector、AWS Security Hub などのサービスを使用します。これらのサービスを使用して、攻撃中および攻撃後の脅威を調査し、通知と修復パイプラインを設定し、追加的な保護策を講じて、貴社環境のセキュリティを改善する方法を学習します。</p>
 <ul>
-<li><strong>Level</strong>: Intermediate</li>
-<li><strong>Duration</strong>: 2 - 3 hours</li>
-<li><strong><a href="https://www.nist.gov/cyberframework/online-learning/components-framework" target="_blank">CSF Functions</a></strong>: Detect, Respond, Recover</li>
-<li><strong><a href="https://d0.awsstatic.com/whitepapers/AWS_CAF_Security_Perspective.pdf" target="_blank">CAF Components</a></strong>: Detective, Responsive</li>
-<li><strong><a href="https://awssecworkshops.com/getting-started/" target="_blank">Prerequisites</a href></strong>: AWS Account, Admin IAM User</li>
+<li><strong>レベル</strong>: 中級</li>
+<li><strong>時間</strong>: 2 ～ 3 時間</li>
+<li><strong><a href="https://www.nist.gov/cyberframework/online-learning/components-framework" target="_blank">CSF 機能</a></strong>: 検出、対応、復旧</li>
+<li><strong><a href="https://d0.awsstatic.com/whitepapers/AWS_CAF_Security_Perspective.pdf" target="_blank">CAF 構成要素</a></strong>: Detective, Responsive</li>
+<li><strong><a href="https://awssecworkshops.com/getting-started/" target="_blank">前提条件</a href></strong>: AWS アカウント、管理者権限を持つ IAM ユーザー</li>
 </ul>
-<h2 id="scenario">Scenario</h2>
-<p>Your company is new to the cloud and has recently performed a lift-and-shift of your infrastructure for piloting purposes.  You are a systems administrator and have been tasked with security monitoring within your AWS environment.  As part of that maintenance you are also responsible for responding to any security event in your environment.</p>
-<h2 id="architecture">Architecture</h2>
-<p>For this Workshop you will have a single instance setup in the us-west-2 region. As this was a “lift-and-shift” migration for piloting, you have yet to build redundancy into your application, so you have a single public-facing web server. The web server has access to the Internet Gateway through an Elastic Network Interface. Customers access your web server through a DNS entry pointing to the Elastic Network Interface. You store static content in an S3 bucket and use the VPC S3 Endpoint Gateway for access from the web server.</p>
-<p>For this Workshop you will have a simple setup with a single instance setup in the us-west-2 region. As this was a “lift-and-shift” migration for piloting, you have yet to build redundancy into your application, so you have a single public-facing web server that is accessed through an internet gateway and retrieves static content from an S3 bucket.</p>
+<h2 id="_1">シナリオ</h2>
+<p>あなたの会社はクラウドに慣れておらず、最近インフラストラクチャーを試験的にリフトアンドシフトで移行しました。あなたはシステム管理者であり、AWS 環境のセキュリティ監視を任されています。その作業の一環として、その環境におけるセキュリティイベントへの対応も担当しています。</p>
+<h2 id="_2">アーキテクチャ</h2>
+<p>このワークショップ用に、us-west-2 リージョンで単一のインスタンスが設定されています。これは試験的な「リフトアンドシフト」移行であり、アプリケーションは冗長化していません。そのため、単一の公開ウェブサーバーとなっています。このウェブサーバーは、Elastic Network Interface を通じてインターネットゲートウェイにアクセスできます。顧客は、Elastic Network Interface を指す DNS エントリを通じてウェブサーバーにアクセスします。静的コンテンツを S3 バケットに保管し、ウェブサーバーからのアクセスに VPC S3 エンドポイントゲートウェイを使用します。</p>
 <p><img alt="Architecture" src="images/diagram-basic-arch.png" title="Workload Architecture" /></p>
-<h2 id="presentation-deck">Presentation deck</h2>
-<p><a href="threat-detect-workshop-presentation.pdf">Workshop Presentation Deck</a></p>
-<h2 id="region">Region</h2>
-<p>Please use the <strong>us-west-2 (Oregon)</strong> region for this workshop.</p>
-<h2 id="modules">Modules</h2>
-<p>This workshop is broken up into the four modules below: </p>
+<h2 id="_3">プレゼンテーションデッキ</h2>
+<p><a href="threat-detect-workshop-presentation.pdf">ワークショップのプレゼンテーションデッキ</a></p>
+<h2 id="_4">リージョン</h2>
+<p>このワークショップには、us-west-2 (Oregon) リージョンを使用してください。</p>
+<h2 id="_5">モジュール</h2>
 <ol>
-<li><a href="01-environment-setup/">Environment Build and Configuration</a></li>
-<li><a href="02-attack-simulation/">Attack Simulation</a> </li>
-<li><a href="03-detection-and-remediation/">Detection and Remediation</a> </li>
-<li><a href="04-review-and-discussion/">Review and Discussion</a></li>
+<li><a href="01-environment-setup/">環境構築と設定</a></li>
+<li><a href="02-attack-simulation/">攻撃シミュレーション</a> </li>
+<li><a href="03-detection-and-remediation/">検知と対応</a> </li>
+<li><a href="04-review-and-discussion/">レビューとディスカッション</a></li>
 </ol>
+<p>合計時間: ± 2 時間</p>
                 
                   
                 
