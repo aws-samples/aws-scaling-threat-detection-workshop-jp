@@ -47,7 +47,7 @@ nav:
   - Overview: 'index.md'
   - 'モジュール 1: 環境構築と設定': '01-environment-setup.md'
   - 'モジュール 2: 攻撃シミュレーション': '02-attack-simulation.md'
-  - 'Module 3: Detect & Respond': '03-detection-and-remediation.md'
+  - 'モジュール 3: 検知、調査、および対応': '03-detection-and-remediation.md'
   - 'Module 4: Discussion': '04-review-and-discussion.md'
   - Contributing: 'contribute.md'
   - License: 'license.md'
