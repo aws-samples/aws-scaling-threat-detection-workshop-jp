@@ -411,29 +411,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enable-amazon-macie" title="Enable Amazon Macie" class="md-nav__link">
-    Enable Amazon Macie
+  <a href="#amazon-macie" title="Amazon Macie の有効化" class="md-nav__link">
+    Amazon Macie の有効化
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#setup-amazon-macie-for-data-discovery-classification" title="Setup Amazon Macie for data discovery &amp; classification" class="md-nav__link">
-    Setup Amazon Macie for data discovery &amp; classification
+  <a href="#amazon-macie_1" title="データの検出と分類のための Amazon Macie の設定" class="md-nav__link">
+    データの検出と分類のための Amazon Macie の設定
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enable-aws-security-hub" title="Enable AWS Security Hub" class="md-nav__link">
-    Enable AWS Security Hub
+  <a href="#aws-security-hub" title="AWS Security Hub の有効化" class="md-nav__link">
+    AWS Security Hub の有効化
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture-overview" title="Architecture overview" class="md-nav__link">
-    Architecture overview
+  <a href="#_1" title="アーキテクチャの概要" class="md-nav__link">
+    アーキテクチャの概要
   </a>
   
 </li>
@@ -551,29 +551,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enable-amazon-macie" title="Enable Amazon Macie" class="md-nav__link">
-    Enable Amazon Macie
+  <a href="#amazon-macie" title="Amazon Macie の有効化" class="md-nav__link">
+    Amazon Macie の有効化
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#setup-amazon-macie-for-data-discovery-classification" title="Setup Amazon Macie for data discovery &amp; classification" class="md-nav__link">
-    Setup Amazon Macie for data discovery &amp; classification
+  <a href="#amazon-macie_1" title="データの検出と分類のための Amazon Macie の設定" class="md-nav__link">
+    データの検出と分類のための Amazon Macie の設定
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enable-aws-security-hub" title="Enable AWS Security Hub" class="md-nav__link">
-    Enable AWS Security Hub
+  <a href="#aws-security-hub" title="AWS Security Hub の有効化" class="md-nav__link">
+    AWS Security Hub の有効化
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture-overview" title="Architecture overview" class="md-nav__link">
-    Architecture overview
+  <a href="#_1" title="アーキテクチャの概要" class="md-nav__link">
+    アーキテクチャの概要
   </a>
   
 </li>
@@ -707,75 +707,75 @@
 </li>
 </ol>
 <h2 id="amazon-guardduty">Amazon GuardDuty の有効化</h2>
-<p>The next step is to enable Amazon GuardDuty, which will continuously monitor your environment for malicious or unauthorized behavior.</p>
+<p>次のステップは、Amazon GuardDuty の有効化です。Amazon GuardDuty は、悪意のある行動や不正な行動がないか、環境を継続的に監視します。</p>
 <ol>
 <li>
-<p>Go to the <a href="https://us-west-2.console.aws.amazon.com/guardduty/home?region=us-west-2" target="_blank">Amazon GuardDuty</a> console (us-west-2).</p>
+<p><a href="https://us-west-2.console.aws.amazon.com/guardduty/home?region=us-west-2" target="_blank">Amazon GuardDuty</a> コンソール (us-west-2) に移動します。</p>
 </li>
 <li>
-<p>Click the <strong>Get Started</strong> button.</p>
+<p><strong>Get Started (開始)</strong> ボタンをクリックします。</p>
 </li>
 <li>
-<p>On the next screen click the <strong>Enable GuardDuty</strong> button.</p>
+<p>次の画面で、<strong>Enable GuardDuty (GuardDuty の有効化)</strong> ボタンをクリックします。</p>
 </li>
 </ol>
-<p>GuardDuty is now enabled and continuously monitoring your CloudTrail logs, VPC flow logs, and DNS Query logs for threats in your environment.</p>
-<h2 id="enable-amazon-macie">Enable Amazon Macie</h2>
-<p>Since you plan on storing sensitive data in S3, let’s quickly enable Amazon Macie.  Macie is a security service that will continuously monitor data access activity for anomalies and generate alerts when it detects risk of unauthorized access or inadvertent data leaks.</p>
+<p>GuardDuty が有効になります。CloudTrail ログ、VPC フローログ、および DNS クエリログが継続的に監視され、環境に脅威がないかチェックされます</p>
+<h2 id="amazon-macie">Amazon Macie の有効化</h2>
+<p>あなたは機密データを S3 に保管するつもりです。Amazon Macie をすぐに有効にしましょう。Macie は、データアクセスアクティビティを継続的に監視して異常がないかをチェックするセキュリティサービスです。不正アクセスや不注意によるデータ漏洩のリスクを検出するとアラートを生成します。</p>
 <ol>
 <li>
-<p>Go to the <a href="https://us-west-2.redirection.macie.aws.amazon.com/" target="_blank">Amazon Macie</a> console (us-west-2).</p>
+<p><a href="https://us-west-2.redirection.macie.aws.amazon.com/" target="_blank">Amazon Macie</a> コンソール (us-west-2) に移動します。</p>
 </li>
 <li>
-<p>Click <strong>Get Started</strong>.</p>
+<p><strong>Get Started (開始)</strong> をクリックします。</p>
 </li>
 <li>
-<p>Macie will create a service-linked role when you enable it. If you would like to see the permissions that the role will have you can click the <strong>View service role permissions</strong>.</p>
+<p>Macie を有効にすると、サービスにリンクされたロールが作成されます。ロールの権限を確認する場合、<strong>View service role permissions (サービスロールのアクセス許可の表示)</strong> をクリックします。</p>
 </li>
 <li>
-<p>Click <strong>Enable Macie</strong>.</p>
+<p><strong>Enable Macie (Macie の有効化)</strong> をクリックします。</p>
 </li>
 </ol>
-<h2 id="setup-amazon-macie-for-data-discovery-classification">Setup Amazon Macie for data discovery &amp; classification</h2>
-<p>Macie is also used for automatically discovering and classifying sensitive data.  Now that Macie is enabled, setup an integration to classify data in your S3 bucket.</p>
+<h2 id="amazon-macie_1">データの検出と分類のための Amazon Macie の設定</h2>
+<p>Macie は、機密データを自動で検出および分類するためにも使用されます。Macie が有効になったので、S3 バケットのデータを分類するための統合を設定します。</p>
 <ol>
 <li>
-<p>In the Amazon Macie console click on <strong>Integrations</strong> on the left navigation.</p>
+<p>Amazon Macie コンソールで、左のナビゲーションの <strong>Integrations (統合)</strong> をクリックします。</p>
 </li>
 <li>
-<p>Find your AWS account ID (there should be only one) and click <strong>Select</strong> </p>
+<p>AWS アカウント ID (1 つだけあります) を探して <strong>Select (選択)</strong> をクリックします。</p>
 </li>
 <li>
-<p>Click <strong>Add</strong> then on the next screen click the check box next to the S3 bucket that ends with <strong>“-data”</strong>. Click <strong>Add</strong></p>
+<p><strong>Add (追加)</strong> をクリックし、次の画面で“-data”で終了する S3 バケットの横にあるチェックボックスをクリックします。<strong>Add (追加)</strong> をクリックします。</p>
 </li>
 <li>
-<p>Leave the options here at the default, click <strong>Review</strong>.</p>
+<p>ここのオプションはデフォルトのままにして <strong>Review (レビュー)</strong> をクリックします。</p>
 </li>
 <li>
-<p>On the next screen click <strong>Start Classification</strong>. </p>
+<p>次の画面で <strong>Start Classification (分類の開始)</strong> をクリックします。</p>
 </li>
 <li>
-<p>Finally click <strong>Done</strong>. Macie is now enabled and has begun to discover, classify and protect your data.</p>
+<p>最後に <strong>Done (終了)</strong> をクリックします。Macie が有効になり、データの検出、分類、および保護を開始しました。</p>
 </li>
 </ol>
-<h2 id="enable-aws-security-hub">Enable AWS Security Hub</h2>
-<p>Now that all of your detective controls have been configured you need to enable <a href="https://aws.amazon.com/security-hub/" target="_blank">AWS Security Hub</a>, which will provide you with a comprehensive view of the security and compliance of your AWS environment.</p>
+<h2 id="aws-security-hub">AWS Security Hub の有効化</h2>
+<p>ここまでで Detective Control の設定が完了したので、<a href="https://aws.amazon.com/security-hub/" target="_blank">AWS Security Hub</a> を有効にする必要があります。これにより、AWS 環境のセキュリティおよびコンプライアンスを包括的に確認できます。</p>
 <ol>
 <li>
-<p>Go to the <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#" target="_blank">AWS Security Hub</a> console.</p>
+<p><a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#" target="_blank">AWS Security Hub</a> コンソールに移動します.</p>
 </li>
 <li>
-<p>Click the <strong>Enable Security Hub</strong> button.</p>
+<p><strong>Enable Security Hub (Security Hub の有効化)</strong> ボタンをクリックします。</p>
 </li>
 <li>
-<p>On the next screen click the <strong>Enable AWS Security Hub</strong> button.</p>
+<p>次の画面で、<strong>Enable AWS Security Hub (AWS Security Hub の有効化)</strong> ボタンをクリックします。</p>
 </li>
 </ol>
-<p>AWS Security Hub is now enabled and will begin collecting and aggregating findings from the security services we have enabled so far.</p>
-<h2 id="architecture-overview">Architecture overview</h2>
-<p>Your environment is now configured and ready for operations.  Below is a diagram to depict the detective controls you now have in place.</p>
+<p>AWS Security Hub が有効になりました。これまで有効化したセキュリティサービスからの検出結果の収集および集約が開始されます。</p>
+<h2 id="_1">アーキテクチャの概要</h2>
+<p>環境が構成され、操作の準備ができました。Detective Control の構成は以下のようになっています。</p>
 <p><img alt="Detective Controls" src="../images/01-diagram-module1.png" /></p>
-<p>After you have successfully setup your environment, you can proceed to the next module.</p>
+<p>環境を適切に設定したら、次のモジュールに進んでください。</p>
                 
                   
                 
