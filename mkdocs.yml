@@ -2,7 +2,7 @@
 
 site_name: AWS 環境における脅威検知と対応
 site_short_name: Scaling threat detection
-site_description: 'This hands-on workshop is where you will learn about a number of AWS services involved with threat detection and response as we walk through real-world threat scenarios. Learn about the threat detection capabilities of Amazon GuardDuty, Amazon Macie and AWS Security Hub and the available response options. For each hands-on scenario, we review methods to detect and respond to threats using the following services: AWS CloudTrail, Amazon VPC flow logs, Amazon CloudWatch Events, Amazon Macie, AWS Lambda, Amazon Inspector, Amazon GuardDuty and Amazon Security Hub.'
+site_description: 'このワークショップは、AWS セキュリティサービスを理解し、そのサービスを使用して貴社環境の脅威を識別および修復する方法を学習する手助けとなるように設計されています。Amazon GuardDuty、Amazon Macie、Amazon Inspector、AWS Security Hub などのサービスを使用します。これらのサービスを使用して、攻撃中および攻撃後の脅威を調査し、通知と修復パイプラインを設定し、追加的な保護策を講じて、貴社環境のセキュリティを改善する方法を学習します。'
 site_author: 'aws-security-workshops@amazon.com'
 site_url: 'https://scaling-threat-detection.awssecworkshops.jp/'
 
@@ -49,5 +49,4 @@ nav:
   - 'モジュール 2: 攻撃シミュレーション': '02-attack-simulation.md'
   - 'モジュール 3: 検知、調査、および対応': '03-detection-and-remediation.md'
   - '# モジュール 4: レビューとディスカッション': '04-review-and-discussion.md'
-  - Contributing: 'contribute.md'
-  - License: 'license.md'
+  - 'コントリビュートのガイドライン': 'contribute.md'

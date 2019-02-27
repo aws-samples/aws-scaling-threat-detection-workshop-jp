@@ -1,61 +1,53 @@
-# Contributing Guidelines
+# コントリビュートのガイドライン
 
-Thank you for your interest in contributing to our project. Whether it's a bug report, new feature, correction, or additional 
-documentation, we greatly value feedback and contributions from our community.
+私たちのプロジェクトへのコントリビュートに関心を示していただきありがとうございます。バグの報告、新機能、訂正、または追加文書のいずれであっても、コミュニティからのフィードバックおよびコントリビュートに深く感謝します。
 
-Please read through this document before submitting any issues or pull requests to ensure we have all the necessary 
-information to effectively respond to your bug report or contribution.
+問題の送信やプルリクエストを行う前にこの文書に目を通し、バグの報告やコントリビュートに対して私たちが効果的に対応するのに必要な情報がすべて含まれていることを確認してください。
 
+## バグの報告/機能のリクエスト
 
-## Reporting Bugs/Feature Requests
+GitHub の問題トラッカーを使用してバグの報告や機能の提案を行うこともできます。
 
-We welcome you to use the GitHub issue tracker to report bugs or suggest features.
+問題を提出するときには、[オープンで存在する問題](https://github.com/aws-samples/aws-scaling-threat-detection-workshop-jp/issues)または[最近クローズされた問題](https://github.com/aws-samples/aws-scaling-threat-detection-workshop-jp/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed)をチェックして、他のユーザーがまだ報告していないことを確認してください。可能なかぎり詳細な情報を含めるようにしてください。次のような詳細情報が非常に役立ちます。
 
-When filing an issue, please check [existing open](https://github.com/aws-samples/aws-security-workshops/issues), or [recently closed](https://github.com/aws-samples/aws-security-workshops/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aclosed%20), issues to make sure somebody else hasn't already 
-reported the issue. Please try to include as much information as you can. Details like these are incredibly useful:
+* 再現可能なテストケースや一連のステップ
+* 使用しているコードのバージョン
+* バグに関連して加えた変更
+* 環境またはデプロイに関して通常と異なる点
 
-* A reproducible test case or series of steps
-* The version of our code being used
-* Any modifications you've made relevant to the bug
-* Anything unusual about your environment or deployment
+## プルリクエストによるコントリビュート
+プルリクエストによるコントリビュートには非常に感謝しています。プルリクエストを送信する前に、次のことを確認してください。
 
+1. master ブランチの最新のソースに対して作業している。
+2. オープンで存在しているプルリクエストや最近マージされたプルリクエストをチェックし、他のユーザーがその問題をまだ提出していないことを確認している。
+3. 重要な作業の問題をオープンしている - 時間を無駄にしないため
 
-## Contributing via Pull Requests
-Contributions via pull requests are much appreciated. Before sending us a pull request, please ensure that:
+プルリクエストを送信するには、次のようにしてください。
 
-1. You are working against the latest source on the *master* branch.
-2. You check existing open, and recently merged, pull requests to make sure someone else hasn't addressed the problem already.
-3. You open an issue to discuss any significant work - we would hate for your time to be wasted.
+1.  リポジトリを fork します。
+2.  ソースを修正します。コントリビュートの対象となる変更に重点を置いてください。すべてのコードのフォーマットも変更してしまっていると、私たちがお客様の変更に焦点を合わせるのが難しくなります。
+3.  ローカルテストに成功していることを確認します。
+4.  明確なコミットメッセージを使用して fork にコミットします。
+5.  プルリクエストインターフェイスのデフォルトの質問に答えて、プルリクエストを送信します。
+6.  自動的な統合が失敗していないかプルリクエストでの報告に注意し、その後のやり取りにご参加ください。
 
-To send us a pull request, please:
-
-1. Fork the repository.
-2. Modify the source; please focus on the specific change you are contributing. If you also reformat all the code, it will be hard for us to focus on your change.
-3. Ensure local tests pass.
-4. Commit to your fork using clear commit messages.
-5. Send us a pull request, answering any default questions in the pull request interface.
-6. Pay attention to any automated CI failures reported in the pull request, and stay involved in the conversation.
-
-GitHub provides additional document on [forking a repository](https://help.github.com/articles/fork-a-repo/) and 
-[creating a pull request](https://help.github.com/articles/creating-a-pull-request/).
+GitHub によって、[リポジトリの fork](https://help.github.com/articles/fork-a-repo/) および 
+[プルリクエストの作成](https://help.github.com/articles/creating-a-pull-request/)に関する追加の文書が提供されています。
 
 
-## Finding contributions to work on
-Looking at the existing issues is a great way to find something to contribute on. As our projects, by default, use the default GitHub issue labels ((enhancement/bug/duplicate/help wanted/invalid/question/wontfix), looking at any ['help wanted'](https://github.com/aws-samples/aws-security-workshops/labels/help%20wanted) issues is a great place to start. 
+## コントリビュートの作業対象を見つける
+コントリビュートの対象を見つけるには、既存の問題を調べるのが早道です。私たちのプロジェクトではデフォルトの GitHub 問題ラベル (enhancement/bug/duplicate/help wanted/invalid/question/wontfix) が使用されているため、['help wanted'](https://github.com/aws-samples/aws-scaling-threat-detection-workshop-jp/labels/help%20wanted) の問題の調査から始めるとよいでしょう。
+
+## 行動規範
+このプロジェクトは [Amazon Open Source Code of Conduct](https://aws.github.io/code-of-conduct) を採用しています。詳細は [Code of Conduct FAQ](https://aws.github.io/code-of-conduct-faq) を参照し、追加の質問またはコメントがある場合は opensource-codeofconduct@amazon.com にお問い合わせください。
 
 
-## Code of Conduct
-This project has adopted the [Amazon Open Source Code of Conduct](https://aws.github.io/code-of-conduct). 
-For more information see the [Code of Conduct FAQ](https://aws.github.io/code-of-conduct-faq) or contact 
-opensource-codeofconduct@amazon.com with any additional questions or comments.
+## セキュリティの問題の通知
+このプロジェクトに潜在的なセキュリティの問題を発見した場合は、[脆弱性レポートページ](http://aws.amazon.com/security/vulnerability-reporting/)から AWS/Amazon Security に通知してください。github  issueは公開されてしまうため作成しないでください。
 
 
-## Security issue notifications
-If you discover a potential security issue in this project we ask that you notify AWS/Amazon Security via our [vulnerability reporting page](http://aws.amazon.com/security/vulnerability-reporting/). Please do **not** create a public github issue.
+## ライセンス
 
+プロジェクトの許可については、[LICENSE](https://github.com/aws-samples/aws-scaling-threat-detection-workshop-jp/blob/master/LICENSE) ファイルを参照してください。コントリビュートに対する許可を確認してください。
 
-## Licensing
-
-See the [LICENSE](https://github.com/aws-samples/aws-security-workshops/blob/master/LICENSE) file for our project's licensing. We will ask you to confirm the licensing of your contribution.
-
-We may ask you to sign a [Contributor License Agreement (CLA)](http://en.wikipedia.org/wiki/Contributor_License_Agreement) for larger changes.
+大きな変更がある場合は、[コントリビュータライセンス協約 (CLA)](http://en.wikipedia.org/wiki/Contributor_License_Agreement) への署名をお願いすることがあります。
