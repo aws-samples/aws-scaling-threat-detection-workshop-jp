@@ -1,126 +1,130 @@
-# Module 4: Review and Discussion
+# モジュール 4: レビューとディスカッション
 
-In the last module we will have a short discussion of the workshop and discuss exactly what occurred. We will also go over a number of questions and then provide instructions on how to clean up the workshop environment to prevent future charges in your AWS account.
+最後のモジュールでは、ワークショップについて簡単に説明します（また、何が起こったのかを正確に議論します）。また、いくつかの質問に答え、ワークショップ環境をクリーンアップする方法も説明します (AWS アカウントが今後請求されないようにします)。
 
-**Agenda**
+**アジェンダ**
 
-1. Review & Discussion – 10 min
-2. Questions – 10 min
-3. Cleanup – 5 min
+1.  レビューとディスカッション – 10 分
+2.  質問 – 10 分
+3.  クリーンアップ – 5 分
 
-## Architecture Overview
-Below is a diagram of the overall workshop setup:
+## アーキテクチャの概要
+ワークショップ全体の設定の図: 
 ![Part 1 Diagram](./images/04-diagram-module4.png)
 
-## What is Really Going On?
+## 何が起こっていたのか
 
-In **Module 1** of the workshop you setup the initial components of your infrastructure including GuardDuty, Macie and a simple notification and remediation pipeline. Some of the steps required manual configuration but you also ran a CloudFormation template which setup some of the components. In **Module 2** you launched a second CloudFormation template that initiated the attack simulated by this workshop. The CloudFormation template created two EC2 instances. One instance (named **Malicious Host**) had an EIP attached to it that was added to your GuardDuty custom threat list. Although the **Malicious Host** is in the same VPC as the other instance, for the sake of the scenario (and to prevent the need to submit a penetration testing request) we acted as if it is on the Internet and represented the attack's computer. The other instance (named **Compromised Instance**) was your web server and it was taken over by the **Malicious Host**. In **Module 3** you investigated the attack, remediated the damage, and setup some automated remediations for future attacks.  
+ワークショップの**モジュール 1** で、GuardDuty、Macie および簡単な通知と修復パイプラインを含むインフラストラクチャの初期設定をしました。一部の手順では手動の設定が必要でしたが、いくつかの構成要素を設定する CloudFormation テンプレートも実行しました。**モジュール 2** では、2 つ目の CloudFormation テンプレートを使って攻撃をシミュレートしました。2 つの EC2 インスタンスが作成し、1 つのインスタンス (**Malicious Host**) には EIP がアタッチされており、GuardDuty カスタム脅威リストに追加されています。**Malicious Host** は他のインスタンスと同じ VPC に存在しますが、シナリオの都合上 (さらに、侵入テストリクエストを送信しなくてもすむように)、インターネット上にあるかのように動作し、攻撃用のコンピュータを役割をしてしました。もう 1 つのインスタンス (**Compromised Instance**) はウェブサーバーであり、**Malicious Host** によって乗っ取られました。**モジュール 3** では、攻撃を調査し、破損を修復し、将来の攻撃に備えていくつかの自動修復を設定しました。   
 
-**Here is what occurred in the attack:**
+**攻撃時に何が起きたか**
 
-1. There are two instances created by the Module 2 CloudFormation template. They are in the same VPC but different subnets. The **Malicious Host** represents the attacker which we pretend is on the Internet. The Elastic IP on the **Malicious Host** is in a custom threat list in GuardDuty. The other instance named **Compromised Instance** represents the web server that was lifted and shifted into AWS.
+1.  モジュール 2 の CloudFormation テンプレートによって 2 つのインスタンスが作成されました。それらのインスタンスは同じ VPC 内の別のサブネットにあります。**Malicious Host** は攻撃者を表し、インターネットに存在するものとしています。**Malicious Host** の Elastic IP は、GuardDuty のカスタム脅威リストにあります。もう 1 つのインスタンスは **Compromised Instance** という名前で、AWS にリフトアンドシフトされたウェブサーバーを表しています。
 
-2. Although company policy is that only key-based authentication should be enabled for SSH, at some point password authentication for SSH was enabled on the **Compromised Instance**.  This misconfiguration is identified in the Inspector scan that is triggered from the GuardDuty finding.
+2.  会社のポリシーでは、SSHは鍵ベースの認証だけを有効にする必要がありましたが、ある時点で SSH のパスワード認証が **Compromised Instance** で有効になりました。 
 
-3. The **Malicious Host** performed a brute force SSH password attack against the **Compromised Instance**. The brute force attack is designed to be successful.
+    !!! info "この誤った設定は、GuardDuty の検出結果からトリガーされた Inspector スキャンによって特定されます。"
+
+3.  **Malicious Host** が、**Compromised Instance** に対してブルートフォース SSH パスワード攻撃を実行しました。ブルートフォース攻撃は成功するように設計されています。
 	
-	!!! info "**GuardDuty Finding**: UnauthorizedAccess:EC2/SSHBruteForce"
+	!!! info "**GuardDuty の検出結果**: UnauthorizedAccess:EC2/SSHBruteForce"
 
-4. The SSH brute force attack was successful and the attacker was able to log in to the **Compromised Instance**.
+4.  SSH ブルートフォース攻撃が成功し、攻撃者が **Compromised Instance** にログインできました。
 	
-	!!! info "Successful login is confirmed in CloudWatch Logs (/threat-detection-wksp/var/log/secure)."
+	!!! info "ログインの成功は CloudWatch ログ (/threat-detection-wksp/var/log/secure) によって確認できます。"
 
-5. The EC2 Instance that is created in the Module 2 CloudFormation template disabled default encryption on the **Data** bucket.  In addition the CloudFormation template made the **Data** bucket public.  This is used for the Macie part of the investigation in Module 3. We pretend that the attacker made the bucket public and removed the default encryption from the bucket.
+5.  モジュール 2 の CloudFormation テンプレートによって作成された EC2 インスタンスは、**データ**バケットのデフォルトの暗号化が無効にしました。さらに CloudFormation テンプレートによって**データ**バケットが外部公開されました。これは、モジュール 3 の調査の Macie の部分によって使用されます。攻撃者がバケットを公開し、バケットのデフォルトの暗号化設定を解除したようです。
 	
-	!!! info "**Macie Alert**: S3 Bucket IAM policy grants global read rights."
+	!!! info "Macie アラート: S3 バケット IAM ポリシーはグローバル読み取り権限を付与します。"
 
-6.  The Compromised Instance also has a cron job that continuously pings the Malicious Host to generate a GuardDuty finding based off the custom threat list.
+6.  Compromised Instance には、Malicious Host を継続的に ping する cron ジョブがあり、カスタム脅威リストに基づいて GuardDuty 検出結果を生成します。
 	
-	!!! info "**GuardDuty Finding**: UnauthorizedAccess:EC2/MaliciousIPCaller.Custom"
+	!!! info "**GuardDuty の検出結果**: UnauthorizedAccess:EC2/MaliciousIPCaller.Custom"
 
-7. The API Calls that generated the API findings come from the **Malicious Host**. The calls use the temp creds from the IAM role for EC2 running on the **Malicious Host**. The GuardDuty findings are generated because the EIP attached to the **Malicious Host** is in a custom threat list. 
+7.  API 関連の検出結果を生成した API 呼び出しは、**Malicious Host** からのものです。この呼び出しでは、**Malicious Host** で実行されている EC2 の IAM ロールからの一時認証情報が使用されています。**Malicious Host** にアタッチされた EIP がカスタム脅威リストにあるため、GuardDuty の検出結果が生成されます。  
 	
-	!!! info "**GuardDuty Finding**: Recon:IAMUser/MaliciousIPCaller.Custom or **GuardDuty Finding**: UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom"
+	!!! info "**GuardDuty の検出結果**: Recon:IAMUser/MaliciousIPCaller.Custom"
 
-8. A number of CloudWatch Events Rules are evoked by the GuardDuty findings and then these trigger various services.
-	1.	**CloudWatch Event Rule**: The generic GuardDuty finding invokes a CloudWatch Event rule which triggers SNS to send an email.
-	2.	**CloudWatch Event Rule**: The generic Macie alert invokes a CloudWatch Event rule which triggers SNS to send an email.
-	3.	**CloudWatch Event Rule**: The SSH brute force attack finding invokes a CloudWatch Event rule which triggers a Lambda function to block the attacker IP address of the attacker via a NACL as well as a Lambda function that runs an Inspector scan on the EC2 instance.
-	4. **CloudWatch Event Rule**: The Unauthorized Access Custom MaliciousIP finding invokes a CloudWatch Event rule which triggers a Lambda function to block the IP address of the attacker via a NACL.
+    !!! info "**GuardDuty の検出結果**: UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom"
 
-## Cleanup
-In order to prevent charges to your account we recommend cleaning up the infrastructure that was created. If you plan to keep things running so you can examine the workshop a bit more please remember to do the cleanup when you are done. It is very easy to leave things running in an AWS account, forgot about it, and then accrue charges. 
+8.  GuardDuty の検出結果によっていくつかの CloudWatch イベントルールが呼び出され、これらのルールによって様々なサービスがトリガーされます。
+	1.	**CloudWatch イベントルール**: 一般的な GuardDuty 検出結果によって、SNS によるメールの送信がトリガーされる CloudWatch イベントルールが呼び出されます。
+	2.	**CloudWatch イベントルール**: 一般的な Macie アラートによって、SNS によるメールの送信がトリガーされる CloudWatch イベントルールが呼び出されます。
+	3.	**CloudWatch イベントルール**: SSH ブルートフォース攻撃の検出結果によって、NACL を介して攻撃者の IP アドレスをブロックする Lambda 関数、および EC2 インスタンスで Inspector スキャンを実行する Lambda 関数をトリガーする CloudWatch イベントルールが呼び出されます。
+	4.  **CloudWatch イベントルール**: Unauthorized Access Custom MaliciousIP の検出結果によって、NACL を介して攻撃者の IP アドレスをブロックする Lambda 関数をトリガーする CloudWatch イベントルールが呼び出されます。
 
-!!! info "You will need to manually delete some resources before you delete the CloudFormation stacks so please do the following steps in order."
+## クリーンアップ
+アカウントへの請求を防ぐために、作成したインフラストラクチャをクリーンアップすることをお勧めします。ワークショップついてもう少し調べるためにそのままにしておく場合は、終了時に忘れずにクリーンアップしてください。AWS アカウントで作成したものを実行中のまま忘れてしまうと、料金が発生します。  
 
-1.	Delete the Inspector objects created for the workshop.
-	* Go to the <a href="https://us-west-2.console.aws.amazon.com/inspector" target="_blank">Amazon Inspector</a> console.
-	* Click on **Assessment targets** in the navigation pane on the left.
-	* Delete all that start with **threat-detection-wksp**.
+!!! info "一部のリソースは CloudFormation スタックを削除する前に手動で削除する必要があるため、以下のステップを順番通りに実行してください。"
 
-2.	Delete the IAM Role for the compromised EC2 instance and the Service-Linked Role for Inspector (if you didn't already have this Role created).
-	* Go to <a href="https://console.aws.amazon.com/iam/" target="_blank">AWS IAM</a> console.
-	* Click on **Roles**
-	* Search for the role named **threat-detection-wksp-compromised-ec2**.
-	* Click the check box next to it and click **Delete**.
-	* Repeat the steps above for the role named **AWSServiceRoleForAmazonInspector**.
+1.	ワークショップ用に作成された Inspector オブジェクトを削除します。
+	* <a href="https://us-west-2.console.aws.amazon.com/inspector" target="_blank">Amazon Inspector</a> コンソールに移動します。
+	* 左のナビゲーションペインの **Assessment targets (評価ターゲット)** をクリックします。
+	* **threat-detection-wksp** で開始するものをすべて削除します。
 
-3.	Delete all three S3 buckets created by the Module 1 CloudFormation template (the buckets that start with **threat-detection-wksp** and end with **-data**, **-threatlist** and **-logs**)
-	* Go to <a href="https://s3.console.aws.amazon.com/s3/home?region=us-west-2" target="_blank">Amazon S3</a> console.
-	* Click on the appropiate bucket.
-	* Click **Delete Bucket**.
-	* Copy and paste the name of the bucket (this is an extra verification that you actually want to delete the bucket).
-	* Repeat the steps above for all three buckets.
+2.	侵害された EC2 インスタンスの IAM ロールおよび Inspector の サービスリンクドロールを削除します (このロールをまだ作成していなかった場合)。
+	* <a href="https://console.aws.amazon.com/iam/" target="_blank">AWS IAM</a> コンソールに移動します。
+	* **Roles (ロール)** をクリックします。
+	* **threat-detection-wksp-compromised-ec2** という名前のロールを探します。
+	* このロールの横にあるチェックボックスをクリックし、**Delete(削除)** をクリックします。
+	* **AWSServiceRoleForAmazonInspector** という名前のロールに対して、このステップを繰り返します。
 
-4.	Delete Module 1 and 2 CloudFormation stacks (**ThreatDetectionWksp-Env-Setup** and **ThreatDetectionWksp-Attacks**).
-	* Go to the <a href="https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks?filter=active" target="_blank">AWS CloudFormation</a> console.
-	* Select the appropiate stack.
-	* Select **Action**.
-	* Click **Delete Stack**.
-	* Repeat the steps above for each stack.
+3.	モジュール 1 の CloudFormation テンプレートによって作成された 3 つの S3 バケット (**threat-detection-wksp** で開始し、**-data**、**-threatlist**、および **-logs** で終了するバケット) をすべて削除します。
+	* <a href="https://s3.console.aws.amazon.com/s3/home?region=us-west-2" target="_blank">Amazon S3</a> コンソールに移動します。
+	* 適切なバケットをクリックします。
+	* **Delete Bucket (バケットの削除)** をクリックします。
+	* バケットの名前をコピーアンドペーストします (これは、そのバケットを本当に削除してよいかどうかの追加の確認です)。
+	* 3 つのバケットすべてに対して前述のステップを繰り返します。
 
-	!!! info "You do not need to wait for the first stack to delete before you delete the second one."
+4.	4.	モジュール 1 および 2 の CloudFormation スタック (**ThreatDetectionWksp-Env-Setup** および **ThreatDetectionWksp-Attacks**) を削除します。
+	* <a href="https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks?filter=active" target="_blank">AWS CloudFormation</a> コンソールに移動します。
+	* 適切なスタックを選択します。
+	* **Action (アクション)** を選択します。
+	* **Delete Stack (スタックの削除)** をクリックします。
+	* それぞれのスタックに対して前述のステップを繰り返します。
 
-5.	Delete the GuardDuty custom threat list and disable GuardDuty (if you didn't already have it configured before the workshop)
-	* Go to the <a href="https://us-west-2.console.aws.amazon.com/guardduty/" target="_blank">Amazon GuardDuty</a> console.
-	* Click on **Lists** on the left navigation.
-	* Click the **X** next to the threat list that starts with **Custom-Threat-List**.
-	* Click **Settings** in the navigation pane on the left navigation.
-	* Click the check box next to **Disable**.
-	* Click **Save settings** and then click **Disable** in the pop-up box.
+	!!! info "最初のスタックが削除されるのを待たずに 2 番目のスタックを削除できます。"
 
-6.	Disable AWS Security Hub
-	* Go to the <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/findings" target="_blank">AWS Security Hub</a> console.
-	* Click on **Settings** on the left navigation.
-	* Click the **General** on the top navigation.
-	* Click **Disable AWS Security Hub**.
+5.	GuardDuty カスタム脅威リストを削除し、GuardDuty を無効にします (ワークショップの前に GuardDuty をまだ有効にしていなかった場合)。
+	* <a href="https://us-west-2.console.aws.amazon.com/guardduty/" target="_blank">Amazon GuardDuty</a> コンソールに移動します。
+	* 左のナビゲーションの **Lists (リスト)** をクリックします。
+	* **Custom-Threat-List** で開始する脅威リストの横にある **X** をクリックします。
+	* 左のナビゲーションにあるナビゲーションペインの **Settings (設定)** をクリックします。
+	* **Disable (無効化)** の横にあるチェックボックスをクリックします。
+	* **Save settings (設定の保存)** をクリックしてから、ポップアップボックスの **Disable (無効化)** をクリックします。
 
-6.	Delete the manual CloudWatch Event Rule you created and the CloudWatch Logs that were generated.
-	* Go to the <a href="https://us-west-2.console.aws.amazon.com/cloudwatch" target="_blank">AWS CloudWatch</a> console.
-	* Click on **Rules** in the navigation pane on the left.
-	* Click the radio button next **threat-detection-wksp-guardduty-finding-maliciousip**.
-	* Select **Action** and click **Delete**.
-	* Click on **Logs** in the navigation pane on the left.
-	* Click the radio button next to **/aws/lambda/threat-detection-wksp-inspector-role-creation**.
-	* Select **Action** and click **Delete log group** and then click **Yes, Delete** in the pop-up box.
-	* Repeat for: 
+6.	AWS Security Hub を無効にします。
+	* <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/findings" target="_blank">AWS Security Hub</a> コンソールに移動します。
+	* 左のナビゲーションの **Settings (設定)** をクリックします。
+	* 上のナビゲーションの **General (一般)** をクリックします。
+	* **Disable AWS Security Hub (AWS Security Hub の無効化)** をクリックします。
+
+7.	作成した手動の CloudWatch イベントルールと、生成された CloudWatch ログを削除します。
+	* <a href="https://us-west-2.console.aws.amazon.com/cloudwatch" target="_blank">AWS CloudWatch</a> コンソールに移動します。
+	* 左のナビゲーションペインの **Rules (ルール)** をクリックします。
+	* **threat-detection-wksp-guardduty-finding-maliciousip** の横にあるラジオボタンをクリックします。
+	* **Action (アクション)** を選択し、**Delete (削除)** をクリックします。
+	* 左のナビゲーションペインの **Logs (ログ)** をクリックします。
+	* **/aws/lambda/threat-detection-wksp-inspector-role-creation** の横にあるラジオボタンをクリックします。
+	* **Action (アクション)** を選択し、**Delete log group (ロググループの削除)** をクリックしてから、ポップアップボックスの **Yes, Delete (はい、削除します)** をクリックします。
+	* 以下に対して繰り返します。 
 		* **/aws/lambda/threat-detection-wksp-remediation-inspector**
 		* **/aws/lambda/threat-detection-wksp-remediation-nacl**
 		* **/threat-detection-wksp/var/log/secure** 
 
-7.	Delete the SNS subscription that was created when you subscribed to SNS Topic.
-	* Go to the <a href="https://us-west-2.console.aws.amazon.com/sns" target="_blank">AWS SNS</a> console.
-	* Click on **Subscriptions** on the left navigation.
-	* Select the check box next to the subscription that shows your e-mail as the Endpoint and has **threat-detection-wksp** in the **Subscription ARN**.
-	* Select **Action** and then click **Delete subscriptions**
+8.	SNS トピックに登録したときに作成された SNS サブスクリプションを削除します。
+	* <a href="https://us-west-2.console.aws.amazon.com/sns" target="_blank">AWS SNS</a> コンソールに移動します。
+	* 左のナビゲーションの **Subscriptions (サブスクリプション)** をクリックします。
+	* 自分のメールアドレスがエンドポイントとして表示されているサブスクリプションで、**Subscription ARN (サブスクリプション ARN)** に **threat-detection-wksp** が含まれているサブスクリプションについて、その横にあるチェックボックスを選択します。
+	* **Action (アクション)** を選択し、**Delete subscriptions (サブスクリプションの削除)** をクリックします。
 
-8.	Disable Macie (if you didn't already have Macie enabled before the workshop).
-	* Go the <a href="https://mt.us-west-2.macie.aws.amazon.com/" target="_blank">Amazon Macie</a> console.
-	* In the upper right-hand corner select the down arrow to the left of the Region and select **Macie General Settings**.
-	* Check the two boxes and click **Disable Amazon Macie**
+9.	Macie を無効にします (ワークショップの前に Macie を有効にしていなかった場合)。
+	* <a href="https://mt.us-west-2.macie.aws.amazon.com/" target="_blank">Amazon Macie</a> コンソールに移動します。
+	* 右上の角で、**Region (リージョン)** の左にある下向き矢印を選択し、**Macie General Settings (Macie 一般設定)** を選択します。
+	* 2 つのボックスを選択し、**Disable Amazon Macie (Amazon Macie の無効化)** をクリックします。
 
-## Finished!
+## 完了です!
 
-Congratulations on completing this workshop! This is the workshop's permanent home, so feel free to revisit as often as you'd like.
+このワークショップを完了しました。おめでとうございます! ここはワークショップの永続的なサイトですので、好きなときにいつでも再度アクセスしてください。
 
 
