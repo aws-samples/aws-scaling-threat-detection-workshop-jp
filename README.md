@@ -4,7 +4,7 @@ This hands-on workshop is where you will learn about a number of AWS services in
 
 ## Start the workshop:
 
-Visit the site to get started: [https://scaling-threat-detection.awssecworkshops.com/](https://scaling-threat-detection.awssecworkshops.com/)
+Visit the site to get started: [https://scaling-threat-detection.awssecworkshops.jp/](https://scaling-threat-detection.awssecworkshops.jp/)
 
 ## License Summary
 
