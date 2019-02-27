@@ -1,41 +1,41 @@
-# Module 2: Attack Simulation
+# モジュール 2: 攻撃シミュレーション
 
-Now that you have detective and responsive controls setup, you'll be running another CloudFormation template which will simulate the actual attack you will be investigating.
+検知と対応の統制の設定が完了したので、もう 1 つの CloudFormation テンプレートを実行します。このテンプレートは、実際の攻撃をシミュレートします。
 
 **Agenda**
 
-1. Run the second CloudFormation template – 5 min
-2. Threat detection and response presentation – 25 min
+1.  つ目の CloudFormation テンプレートの実行 – 5 分
+2.  脅威検知と対応のプレゼンテーション – 25 分
 
-## Deploy the CloudFormation template
+## CloudFormation テンプレートのデプロイ
 
-To initiate the attack simulation you will need to run the module 2 CloudFormation template: 
+攻撃シミュレーションを開始するには、モジュール 2 の CloudFormation テンプレートを実行する必要があります。 
 
 !!! info "Before you deploy the CloudFormation template feel free to view it <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/blob/master/templates/02-attack-simulation.yml" target="_blank">repo</a href>."
 
-Region| Deploy
+リージョン| デプロイ
 ------|-----
 US West 2 (Oregon) | <a href="https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=ThreatDetectionWksp-Attacks&templateURL=https://s3-us-west-2.amazonaws.com/sa-security-specialist-workshops-us-west-2/threat-detect-workshop/staging/02-attack-simulation.yml" target="_blank">![Deploy Module 2 in us-west-2](./images/deploy-to-aws.png)</a>
 
-1. Click the **Deploy to AWS** button above.  This will automatically take you to the console to run the template.  
+1.  上の **Deploy to AWS (AWS へのデプロイ)** ボタンをクリックします。これにより、テンプレートを実行するコンソールに自動的に移動します。   
 
-2. The name of the stack will be automatically populated but you are free to change it, after which click **Next**, then **Next** again (leave everything on this page at the default).  
+2.  スタックの名前は自動的に移入されますが、自由に変更できます。その後、**Next (次)** をクリックしてからもう一度 **Next (次)** をクリックします (このページの設定はデフォルトのままにします)。  
 
-3. Finally, acknowledge that the template will create IAM roles and click **Create**
+3.  最後に、テンプレートによって IAM ロールが作成されることに同意し、**Create (作成)** をクリックします。
 
 ![IAM Capabilities](./images/iam-capabilities.png)
 
-This will bring you back to the CloudFormation console. You can refresh the page to see the stack starting to create. Before moving on, make sure the stack is in a **CREATE_COMPLETE** status as shown below.
+これによって CloudFormation コンソールに戻ります。ページを更新して、作成を開始するスタックを確認することができます。先に進む前に、スタックが以下に示すように **CREATE_COMPLETE** ステータスであることを確認します。
 
 ![Stack Complete](./images/02-stack-complete.png)
 
-## Architecture overview
+## 脅威検知と対応のプレゼンテーション
 
-Below is a diagram of the setup after the module 2 CloudFormation stack is created.
+以下は、モジュール 2 の CloudFormation スタックが作成された後の設定の図です。
 
 ![Module 2 Diagram](./images/02-diagram-module2-3.png)
 
 !!! warning "Threat detection and response presentation"
-    **AWS Sponsored Event**: If you are going through this workshop in a classroom setting then wait till the presentation is over before starting module 3 (the presentation will allow enough time to pass for the attack scenario to complete.)
+    **AWS Sponsored Event**: クラスルームトレーニングでこのワークショップを行う場合、プレゼンテーションが終わるまで待ってからモジュール 3 を開始してください (攻撃シナリオが完了するように、プレゼンテーションには十分な時間が割り当てられます。)
 
-    **Individual**: If you are going through this workshop outside of a classroom setting you can proceed to Module 3.  Please note it will take at least **20 minutes** after the 2nd CloudFormation template has completed before you will start seeing findings.
+    **Individual**: クラスルームトレーニング以外でこのワークショップを行う場合は、モジュール 3 に進むことができます。2 つ目の CloudFormation テンプレートが完了してから検出結果の表示が始まるまで、少なくとも 20 分かかることに注意してください。
