@@ -28,7 +28,7 @@ extra_css:
 extra:
   social:
     - type: 'home'
-      link: 'https://awssecworkshops.com'
+      link: 'https://awssecworkshops.jp'
     - type: 'shield'
       link: 'https://aws.amazon.com/security/'
     - type: 'twitter'
