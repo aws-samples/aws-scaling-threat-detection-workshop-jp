@@ -130,6 +130,6 @@ AWS Security Hub が有効になりました。これまで有効化したセキ
 
 環境が構成され、操作の準備ができました。Detective Control の構成は以下のようになっています。
 
-![Detective Controls](./images/01-diagram-module1.png)
+![Detective Controls](./images/01-diagram-module-1.png)
 
 環境を適切に設定したら、次のモジュールに進んでください。
