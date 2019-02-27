@@ -42,7 +42,7 @@
     
     
       
-        <title>Module 2: Attack Simulation - AWS 環境における脅威検知と対応</title>
+        <title>モジュール 2: 攻撃シミュレーション - AWS 環境における脅威検知と対応</title>
       
     
     
@@ -99,7 +99,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#module-2-attack-simulation" tabindex="1" class="md-skip">
+      <a href="#2" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -157,7 +157,7 @@
                   AWS 環境における脅威検知と対応
                 </span>
                 <span class="md-header-nav__topic">
-                  Module 2: Attack Simulation
+                  モジュール 2: 攻撃シミュレーション
                 </span>
               
             
@@ -384,11 +384,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Module 2: Attack Simulation
+        モジュール 2: 攻撃シミュレーション
       </label>
     
-    <a href="./" title="Module 2: Attack Simulation" class="md-nav__link md-nav__link--active">
-      Module 2: Attack Simulation
+    <a href="./" title="モジュール 2: 攻撃シミュレーション" class="md-nav__link md-nav__link--active">
+      モジュール 2: 攻撃シミュレーション
     </a>
     
       
@@ -402,15 +402,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#deploy-the-cloudformation-template" title="Deploy the CloudFormation template" class="md-nav__link">
-    Deploy the CloudFormation template
+  <a href="#cloudformation" title="CloudFormation テンプレートのデプロイ" class="md-nav__link">
+    CloudFormation テンプレートのデプロイ
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture-overview" title="Architecture overview" class="md-nav__link">
-    Architecture overview
+  <a href="#_1" title="脅威検知と対応のプレゼンテーション" class="md-nav__link">
+    脅威検知と対応のプレゼンテーション
   </a>
   
 </li>
@@ -495,15 +495,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#deploy-the-cloudformation-template" title="Deploy the CloudFormation template" class="md-nav__link">
-    Deploy the CloudFormation template
+  <a href="#cloudformation" title="CloudFormation テンプレートのデプロイ" class="md-nav__link">
+    CloudFormation テンプレートのデプロイ
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture-overview" title="Architecture overview" class="md-nav__link">
-    Architecture overview
+  <a href="#_1" title="脅威検知と対応のプレゼンテーション" class="md-nav__link">
+    脅威検知と対応のプレゼンテーション
   </a>
   
 </li>
@@ -527,23 +527,23 @@
                   <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop-jp/edit/master/docs/02-attack-simulation.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="module-2-attack-simulation">Module 2: Attack Simulation</h1>
-<p>Now that you have detective and responsive controls setup, you'll be running another CloudFormation template which will simulate the actual attack you will be investigating.</p>
+                <h1 id="2">モジュール 2: 攻撃シミュレーション</h1>
+<p>検知と対応の統制の設定が完了したので、もう 1 つの CloudFormation テンプレートを実行します。このテンプレートは、実際の攻撃をシミュレートします。</p>
 <p><strong>Agenda</strong></p>
 <ol>
-<li>Run the second CloudFormation template – 5 min</li>
-<li>Threat detection and response presentation – 25 min</li>
+<li>つ目の CloudFormation テンプレートの実行 – 5 分</li>
+<li>脅威検知と対応のプレゼンテーション – 25 分</li>
 </ol>
-<h2 id="deploy-the-cloudformation-template">Deploy the CloudFormation template</h2>
-<p>To initiate the attack simulation you will need to run the module 2 CloudFormation template: </p>
+<h2 id="cloudformation">CloudFormation テンプレートのデプロイ</h2>
+<p>攻撃シミュレーションを開始するには、モジュール 2 の CloudFormation テンプレートを実行する必要があります。 </p>
 <div class="admonition info">
 <p class="admonition-title">Before you deploy the CloudFormation template feel free to view it <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/blob/master/templates/02-attack-simulation.yml" target="_blank">repo</a href>.</p>
 </div>
 <table>
 <thead>
 <tr>
-<th>Region</th>
-<th>Deploy</th>
+<th>リージョン</th>
+<th>デプロイ</th>
 </tr>
 </thead>
 <tbody>
@@ -555,25 +555,25 @@
 </table>
 <ol>
 <li>
-<p>Click the <strong>Deploy to AWS</strong> button above.  This will automatically take you to the console to run the template.  </p>
+<p>上の <strong>Deploy to AWS (AWS へのデプロイ)</strong> ボタンをクリックします。これにより、テンプレートを実行するコンソールに自動的に移動します。   </p>
 </li>
 <li>
-<p>The name of the stack will be automatically populated but you are free to change it, after which click <strong>Next</strong>, then <strong>Next</strong> again (leave everything on this page at the default).  </p>
+<p>スタックの名前は自動的に移入されますが、自由に変更できます。その後、<strong>Next (次)</strong> をクリックしてからもう一度 <strong>Next (次)</strong> をクリックします (このページの設定はデフォルトのままにします)。  </p>
 </li>
 <li>
-<p>Finally, acknowledge that the template will create IAM roles and click <strong>Create</strong></p>
+<p>最後に、テンプレートによって IAM ロールが作成されることに同意し、<strong>Create (作成)</strong> をクリックします。</p>
 </li>
 </ol>
 <p><img alt="IAM Capabilities" src="../images/iam-capabilities.png" /></p>
-<p>This will bring you back to the CloudFormation console. You can refresh the page to see the stack starting to create. Before moving on, make sure the stack is in a <strong>CREATE_COMPLETE</strong> status as shown below.</p>
+<p>これによって CloudFormation コンソールに戻ります。ページを更新して、作成を開始するスタックを確認することができます。先に進む前に、スタックが以下に示すように <strong>CREATE_COMPLETE</strong> ステータスであることを確認します。</p>
 <p><img alt="Stack Complete" src="../images/02-stack-complete.png" /></p>
-<h2 id="architecture-overview">Architecture overview</h2>
-<p>Below is a diagram of the setup after the module 2 CloudFormation stack is created.</p>
+<h2 id="_1">脅威検知と対応のプレゼンテーション</h2>
+<p>以下は、モジュール 2 の CloudFormation スタックが作成された後の設定の図です。</p>
 <p><img alt="Module 2 Diagram" src="../images/02-diagram-module2-3.png" /></p>
 <div class="admonition warning">
 <p class="admonition-title">Threat detection and response presentation</p>
-<p><strong>AWS Sponsored Event</strong>: If you are going through this workshop in a classroom setting then wait till the presentation is over before starting module 3 (the presentation will allow enough time to pass for the attack scenario to complete.)</p>
-<p><strong>Individual</strong>: If you are going through this workshop outside of a classroom setting you can proceed to Module 3.  Please note it will take at least <strong>20 minutes</strong> after the 2nd CloudFormation template has completed before you will start seeing findings.</p>
+<p><strong>AWS Sponsored Event</strong>: クラスルームトレーニングでこのワークショップを行う場合、プレゼンテーションが終わるまで待ってからモジュール 3 を開始してください (攻撃シナリオが完了するように、プレゼンテーションには十分な時間が割り当てられます。)</p>
+<p><strong>Individual</strong>: クラスルームトレーニング以外でこのワークショップを行う場合は、モジュール 3 に進むことができます。2 つ目の CloudFormation テンプレートが完了してから検出結果の表示が始まるまで、少なくとも 20 分かかることに注意してください。</p>
 </div>
                 
                   
