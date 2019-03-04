@@ -6,7 +6,7 @@
 
 シナリオを開始して環境を設定するには、モジュール 1 の CloudFormation テンプレートを実行する必要があります。
 
-!!! info "Before you deploy the CloudFormation template feel free to view it <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/blob/master/templates/01-environment-setup.yml" target="_blank">here</a href>."
+!!! info "CloudFormation Template実行する前に <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/blob/master/templates/01-environment-setup.yml" target="_blank">こちら</a href>.もご確認ください。"
 
 リージョン| デプロイ
 ------|-----
@@ -20,7 +20,7 @@ US West 2 (Oregon) | <a href="https://console.aws.amazon.com/cloudformation/home
 	|---|---|
 	| Stack name | ThreatDetectionWksp-Env-Setup  |
 	| Email Address | A ***valid*** email address  |
-	
+
 3. パラメータを入力したら、**Next (次)** をクリックし、もう一度 **Next (次)** をクリックします (このページの設定はデフォルトのままにします)。
 
 4. 最後に、テンプレートによって IAM ロールが作成されることに確認し、**Create (作成)** をクリックします。
@@ -33,7 +33,7 @@ US West 2 (Oregon) | <a href="https://console.aws.amazon.com/cloudformation/home
 
 SNS から、サブスクリプションを確認するように依頼するメールが届きます。ワークショップ中に AWS のサービスからメールアラートを受信できるように、**サブスクリプションを確認します**。
 
-!!! info "アラートメールの送信元は <no-reply@sns.amazonaws.com> になります。受信できない場合は、ご利用のメール環境でフォルダ振り分けがされていたり、SPAM判定をされていたりしないかご確認ください。" 
+!!! info "アラートメールの送信元は <no-reply@sns.amazonaws.com> になります。受信できない場合は、ご利用のメール環境でフォルダ振り分けがされていたり、SPAM判定をされていたりしないかご確認ください。"
 
 ## Amazon CloudWatch イベントルールおよび自動応答の設定
 
@@ -45,11 +45,11 @@ SNS から、サブスクリプションを確認するように依頼するメ�
 2.	左のナビゲーションペインで、**Events (イベント)** の下の **Rules (ルール)** をクリックします。
 
 	!!! question "現在のルールは何を実行するように設定されていますか?"
-	
+
 3.	**Create Rule (ルールの作成)** をクリックします。
 
 4.	**Event Pattern (イベントパターン)** の下で、**Build event pattern to match events by service (サービス別のイベントに一致するイベントパターンの構築)** をクリックし、ドロップダウンの **Custom event pattern (カスタムイベントパターン)** を選択します。以下のカスタムイベントパターンを貼り付けます。
-	
+
 ```json
 {
   "source": [

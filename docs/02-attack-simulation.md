@@ -9,9 +9,9 @@
 
 ## CloudFormation テンプレートのデプロイ
 
-攻撃シミュレーションを開始するには、モジュール 2 の CloudFormation テンプレートを実行する必要があります。 
+攻撃シミュレーションを開始するには、モジュール 2 の CloudFormation テンプレートを実行する必要があります。
 
-!!! info "Before you deploy the CloudFormation template feel free to view it <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/blob/master/templates/02-attack-simulation.yml" target="_blank">repo</a href>."
+!!! info "CloudFormation Template実行する前に <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/blob/master/templates/02-attack-simulation.yml" target="_blank">こちら</a href>.もご確認ください"
 
 リージョン| デプロイ
 ------|-----
@@ -35,7 +35,7 @@ US West 2 (Oregon) | <a href="https://console.aws.amazon.com/cloudformation/home
 
 ![Module 2 Diagram](./images/02-diagram-module2-3.png)
 
-!!! warning "Threat detection and response presentation"
+!!! warning "脅威検知と対応のプレゼンテーション"
     **AWS Sponsored Event**: クラスルームトレーニングでこのワークショップを行う場合、プレゼンテーションが終わるまで待ってからモジュール 3 を開始してください (攻撃シナリオが完了するように、プレゼンテーションには十分な時間が割り当てられます。)
 
     **Individual**: クラスルームトレーニング以外でこのワークショップを行う場合は、モジュール 3 に進むことができます。2 つ目の CloudFormation テンプレートが完了してから検出結果の表示が始まるまで、少なくとも 20 分かかることに注意してください。
