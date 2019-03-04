@@ -659,7 +659,7 @@ Outline for 03-detection-and-remediation.md
 #### Verify the the access keys have been rotated (Systems Manager)
 
 ## Part 2 - Compromised EC2 Instance
-### Detect and Investigate 
+### Detect and Investigate
 #### Explore findings related to the instance ID (securityhub)
 #### Determine if ssh password authentication is enabled (securityhub)
 #### Determine if the attacker was able to login to the EC2 instance (CloudWatch logs)
@@ -667,7 +667,7 @@ Outline for 03-detection-and-remediation.md
 #### Modify the EC2 security group (EC2)
 
 ## Part 3 - Compromised S3 security
-### Detect and Investigate 
+### Detect and Investigate
 #### Investigate any S3 related findings (securityhub)
 #### Check if sensitive data was involved (Macie)
 ### Respond
@@ -680,7 +680,7 @@ Outline for 03-detection-and-remediation.md
 <p>残念ながら、環境の構成が適切でないため、攻撃者がウェブサーバーにアクセスできた可能性があります。設定したセキュリティサービスから、悪意のあるアクティビティを示すアラートを受け取っています。これらのアラートには、既知の悪意のある IP アドレスとのコミュニケーション、アカウント偵察、Amazon S3 バケット設定の変更、およびセキュリティ設定の無効化が含まれます。侵入者のアクセスをブロックして、脆弱性を修復し、構成を適切な状態に復元するために、侵入者がどのアクティビティを実行した可能性があるか、どのような方法で実行したかを明確にする必要があります。</p>
 <h2 id="1-aws-iam">第 1 部 -  AWS IAM 認証情報の侵害</h2>
 <h3 id="_1">検知および調査</h3>
-<p>有効にしたセキュリティサービスからメールアラートを受け取りました。どうしたらよいでしょうか? あなたの組織では、リスク駆動型の検知戦略の一環で、AWS IAM 関連の検出結果を優先することにしました。 </p>
+<p>有効にしたセキュリティサービスからメールアラートを受け取りました。どうしたらよいでしょうか? あなたの組織では、リスク駆動型の検知戦略の一環で、AWS IAM 関連の検出結果を優先することにしました。</p>
 <ol>
 <li>メールアラートを分類し、AWS IAM プリンシパルに関連するアラート (たとえば、Amazon GuardDuty 検出結果: UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom) を特定します。</li>
 <li>メールアラートから <strong><code>Access Key ID</code></strong> をコピーします。</li>
@@ -692,7 +692,7 @@ Outline for 03-detection-and-remediation.md
 <p><a href="https://us-west-2.console.aws.amazon.com/guardduty/" target="_blank">Amazon GuardDuty</a> コンソール (us-west-2) に移動します。</p>
 </li>
 <li>
-<p><strong>Add filter criteria (フィルタ基準の追加)</strong> ボックスをクリックします。 <strong>Access Key ID (アクセスキー ID)</strong> を選択し、メールからコピーした <Access Key ID> を貼り付けます。 </p>
+<p><strong>Add filter criteria (フィルタ基準の追加)</strong> ボックスをクリックします。 <strong>Access Key ID (アクセスキー ID)</strong> を選択し、メールからコピーした <Access Key ID> を貼り付けます。</p>
 <div class="admonition question">
 <p class="admonition-title">このアクセスキー ID に関連してどのような検出結果がありますか?</p>
 </div>
@@ -710,7 +710,7 @@ Outline for 03-detection-and-remediation.md
 <p>ロールの一意の ID とセッション名の両方を含む完全な <strong>Principal Id (プリンシパル ID)</strong> をコピーします。 <strong>"principalId": "<code>&lt; unique ID &gt;:&lt; session name &gt;</code>"</strong></p>
 </li>
 <li>
-<p><strong>Resource affected (影響のあるリソース)</strong> の下の<strong>User name (ユーザー名)</strong> を調べます。API 呼び出しを行うために使用された一時認証情報が、IAM ロールがアタッチされた EC2 インスタンスからであるため、このユーザー名は、関係する IAM ロールの名前に対応します。 </p>
+<p><strong>Resource affected (影響のあるリソース)</strong> の下の<strong>User name (ユーザー名)</strong> を調べます。API 呼び出しを行うために使用された一時認証情報が、IAM ロールがアタッチされた EC2 インスタンスからであるため、このユーザー名は、関係する IAM ロールの名前に対応します。</p>
 </li>
 </ol>
 <!--
@@ -722,13 +722,13 @@ To use SH for this we could use the insight "AWS users with the most suspicious 
 2. The link should take you to the **Investigate** section but if not, click on **Investigate** in the navigation on the left.
 3. Click in the **Add filter** box:
 
-    * Scroll down to **Resource ID**, change the operator to **CONTAINS** and paste in the `<Access Key ID>` you copied from the e-mail. 
+    * Scroll down to **Resource ID**, change the operator to **CONTAINS** and paste in the `<Access Key ID>` you copied from the e-mail.
 
     >  What findings do you see related to this access key ID?
 
 4. Click on one of the findings to see the details.
 
-    > Where did these credentials come from? 
+    > Where did these credentials come from?
 
 Examining **userType** under **Resource details**/**Details** you can see that the access key referenced in this finding is from an IAM assumed role. Examining **principalID** under **Details** you will find two strings separated by a colon. The first is the [unique ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids) for the role and the second is the EC2 instance ID. The **principalID** contains a unique ID for the entity making the API request, and when the request is made using temporary security credentials (which is what happens for an assume role call) it also includes a session name. In this case the session name is the EC2 instance ID  since the assume role call was done using an IAM role for EC2.
 
@@ -763,7 +763,7 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <p><strong>Revoke active sessions (アクティブなセッションの無効化)</strong> をクリックします。</p>
 </li>
 <li>
-<p>確認のチェックボックスをクリックし、<strong>Revoke active sessions (アクティブなセッションの無効化)</strong> をクリックします。 </p>
+<p>確認のチェックボックスをクリックし、<strong>Revoke active sessions (アクティブなセッションの無効化)</strong> をクリックします。</p>
 <div class="admonition question">
 <p class="admonition-title">このロールによって発行された一時セキュリティ認証情報の使用を実際に防ぐために、どのような仕組みがこのステップで設定されますか?</p>
 </div>
@@ -778,14 +778,14 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <li>
 <p><strong>Instance State (インスタンスの状態)</strong> の下でインスタンスの状態が <strong>stopped (停止済み)</strong> になるまで待ってから (EC2 コンソールのリフレッシュが必要な場合あり)、インスタンスを <strong>Start (起動)</strong> します。</p>
 <div class="admonition info">
-<p class="admonition-title">You will need to wait until all Status Checks have passed before continuing.</p>
+<p class="admonition-title">ここで次の作業の前にすべてのステータスチェックを待つ必要があります。</p>
 </div>
 </li>
 </ol>
 <p><strong>アクセスキーのローテートを確認 (Systems Manager)</strong></p>
 <ol>
 <li>
-<p><a href="https://us-west-2.console.aws.amazon.com/systems-manager/managed-instances?region=us-west-2" target="_blank">AWS Systems Manager</a> コンソールに移動し、左のナビゲーションにある <strong>Session Manager (セッションマネージャー)</strong> をクリックし、[Start Session (セッションの開始)] をクリックします。 </p>
+<p><a href="https://us-west-2.console.aws.amazon.com/systems-manager/managed-instances?region=us-west-2" target="_blank">AWS Systems Manager</a> コンソールに移動し、左のナビゲーションにある <strong>Session Manager (セッションマネージャー)</strong> をクリックし、[Start Session (セッションの開始)] をクリックします。</p>
 <p><strong>Instance state (インスタンスの状態)</strong> が <strong>running (実行中)</strong> の <strong>threat-detection-wksp: Compromised Instance</strong> というインスタンスが表示されます。</p>
 </li>
 <li>
@@ -818,7 +818,7 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <li>
 <p><strong>Add filter (フィルタの追加)</strong> ボックスをクリックします。</p>
 <ul>
-<li><strong>Resource ID (リソース ID)</strong> にスクロールダウンし、演算子を <strong>CONTAINS (含む)</strong> に変更し、(GuardDuty の検出結果で収集したプリンシパル ID から) 前にコピーした <Instance ID> を貼り付けます。 </li>
+<li><strong>Resource ID (リソース ID)</strong> にスクロールダウンし、演算子を <strong>CONTAINS (含む)</strong> に変更し、(GuardDuty の検出結果で収集したプリンシパル ID から) 前にコピーした <Instance ID> を貼り付けます。</li>
 <li><strong>Add filter (フィルタの追加)</strong> ボックスをもう一度クリックして別のフィルタを追加し、<strong>Product Name (製品名)</strong> にスクロールダウンして GuardDuty と入力します。</li>
 </ul>
 <div class="admonition question">
@@ -844,33 +844,33 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <li>
 <p>リンクにより <strong>Findings (検出結果)</strong> セクションに移動しますが、移動しなかった場合は左のナビゲーションの <strong>Findings (検出結果)</strong> をクリックします。<strong>Add filter (フィルタの追加)</strong> ボックスをクリックします。</p>
 <ul>
-<li><strong>Title (タイトル)</strong> にスクロールダウンし、演算子を <strong>CONTAINS (含む)</strong> に変更し、<code>password authentication over SSH</code>. </li>
+<li><strong>Title (タイトル)</strong> にスクロールダウンし、演算子を <strong>CONTAINS (含む)</strong> に変更し、<code>password authentication over SSH</code>.</li>
 </ul>
 </li>
 </ol>
-<p>SSH に関連する検出結果、および SSH ブルートフォース攻撃を受けたインスタンスのパスワード認証に関連する検出結果があります。 </p>
+<p>SSH に関連する検出結果、および SSH ブルートフォース攻撃を受けたインスタンスのパスワード認証に関連する検出結果があります。</p>
 <!--
 1. Go to [AWS Security Hub](https://us-west-2.console.aws.amazon.com/securityhub/) in the AWS Management Console.
 2. On the left navigation, click on **Explore Findings**
 3. Add the following filter:
-    * **Keyword: `password authentication over SSH`** 
+    * **Keyword: `password authentication over SSH`**
     * **Provider: Inspector**
-4. In the results do you see a finding regarding SSH and password authentication for the instance that experienced the SSH brute force attack? 
+4. In the results do you see a finding regarding SSH and password authentication for the instance that experienced the SSH brute force attack?
 -->
 
 <div class="admonition info">
 <p class="admonition-title">しばらくしても検出結果が表示されない場合、Inspector エージェントに問題がある可能性があります。<a href="https://us-west-2.console.aws.amazon.com/inspector" target="_blank">Inspector</a> コンソールに移動し、[Assessment Templates (評価テンプレート)],をクリックし、threat-detection-wksp で始まるテンプレートを選択して [Run (実行)] をクリックします。スキャンが完了するまで 15 分 待ってください。また、[Assessment runs (評価実行)] を調べて [status (ステータス)] をチェックすることもできます。このモジュールを続けて、後で結果を確認してください。</p>
 </div>
-<p>検出結果に基づいて、インスタンスで SSH によるパスワード認証が構成されていることがわかります。さらに、Inspector の他の検出結果をいくつか調べると、パスワードの複雑さの制限がないことがわかります。これは、インスタンスが SSH ブルートフォース攻撃を受けやすいことを意味します。 </p>
+<p>検出結果に基づいて、インスタンスで SSH によるパスワード認証が構成されていることがわかります。さらに、Inspector の他の検出結果をいくつか調べると、パスワードの複雑さの制限がないことがわかります。これは、インスタンスが SSH ブルートフォース攻撃を受けやすいことを意味します。</p>
 <!--
 2.  Click on **securityhub default** under **Insight Groups**
 3. Click **Manage** (in the upper right hand corner of the dashboard) and then click **Define Insight**
-4.  We will now define the filters for the insight. Under "Findings" select **Provider** from the pull down menu. Next to that select **Inspector**. This will add **Provider: Inspector** to the filters. Next select **Keyword** from the pull down menu under findings (it should already be the default.) Next to that enter the following text `password authentication over SSH` then hit enter. You will have added a keyword filter. 
+4.  We will now define the filters for the insight. Under "Findings" select **Provider** from the pull down menu. Next to that select **Inspector**. This will add **Provider: Inspector** to the filters. Next select **Keyword** from the pull down menu under findings (it should already be the default.) Next to that enter the following text `password authentication over SSH` then hit enter. You will have added a keyword filter.
 5. Click **Create insight** so we can save this insight for future use. Enter the following into insight name **`Instances allowing password authentication over SSH`** and toggle the **Display on insights page** so it is enabled then finally click **Ok**.
 -->
 
 <p><strong>攻撃者が EC2 インスタンスにログインできたかどうか判断 (CloudWatch ログ)</strong></p>
-<p>インスタンスが SSH ブルートフォース攻撃を受けやすいことがわかったので、CloudWatch ログを調べて、SSH ログインが成功したかどうか(最終的にSSH ブルートフォース攻撃が成功したかどうか)を確認するためのメトリクスを作成しましょう。企業のポリシーで、EC2 インスタンスから CloudWatch に特定のセキュリティログを送信しています。 </p>
+<p>インスタンスが SSH ブルートフォース攻撃を受けやすいことがわかったので、CloudWatch ログを調べて、SSH ログインが成功したかどうか(最終的にSSH ブルートフォース攻撃が成功したかどうか)を確認するためのメトリクスを作成しましょう。企業のポリシーで、EC2 インスタンスから CloudWatch に特定のセキュリティログを送信しています。</p>
 <ol>
 <li><a href="https://us-west-2.console.aws.amazon.com/cloudwatch/home?region=us-west-2#logs:" target="_blank">CloudWatch ログ</a> に移動します。</li>
 <li>ロググループ <strong>/threat-detection-wksp/var/log/secure</strong> をクリックします。</li>
@@ -919,7 +919,7 @@ Filtering on the access key ID like you did previously earlier will only show yo
 </ol>
 <h2 id="3-s3">第 3 部 – 侵害された S3 バケット</h2>
 <h3 id="_5">検知および調査</h3>
-<p>SSH ブルートフォース攻撃が成功したことがわかり、盗まれた IAM 認証情報を無効にしたので、次は何か別のことが発生したかどうかを明確にする必要があります。ここで実行できる 1 つのステップは、一時認証情報を生成した IAM ロールにアタッチされている IAM ポリシーを調べることです。ポリシーで、Amazon S3 サービスに関連するアクセス許可があることがわかるので、調査を続行するときにこのアクセス許可を心に留めておきます。 </p>
+<p>SSH ブルートフォース攻撃が成功したことがわかり、盗まれた IAM 認証情報を無効にしたので、次は何か別のことが発生したかどうかを明確にする必要があります。ここで実行できる 1 つのステップは、一時認証情報を生成した IAM ロールにアタッチされている IAM ポリシーを調べることです。ポリシーで、Amazon S3 サービスに関連するアクセス許可があることがわかるので、調査を続行するときにこのアクセス許可を心に留めておきます。</p>
 <p>侵害されたEC2 インスタンスにアタッチされていた IAM ロールのポリシーの一部</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;Version&quot;</span><span class="p">:</span> <span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
@@ -953,11 +953,11 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <ol>
 <li>AWS マネジメントコンソールの <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/insights" target="_blank">AWS Security Hub</a> に移動します。</li>
 <li>リンクにより <strong>Insights (インサイト)</strong> セクションに移動しますが、移動しなかった場合は左のナビゲーションの <strong>Insights (インサイト)</strong> をクリックします。</li>
-<li><strong>Filter insights (インサイトのフィルタ)</strong> ボックスをクリックし、組み込みインサイト <strong>Top S3 buckets by counts of findings (検出結果数による上位の S3 バケット)</strong> を表示する Top S3 と入力します。そのインサイトをクリックします。 </li>
+<li><strong>Filter insights (インサイトのフィルタ)</strong> ボックスをクリックし、組み込みインサイト <strong>Top S3 buckets by counts of findings (検出結果数による上位の S3 バケット)</strong> を表示する Top S3 と入力します。そのインサイトをクリックします。</li>
 <li>どのバケットが表示されますか? <strong>threat-detection-wksp-</strong> を含み <strong>-data</strong> で終了するバケットが表示されます。そのバケットをクリックします。</li>
 <li>検出結果には何が表示されますか?</li>
 </ol>
-<p>この <strong>Security Hub</strong> のインサイトは、攻撃者が実行した可能性があることを明確にする 1 つの方法です。しかし、すべての状況で役に立つとは限りません。攻撃者が実行したことを調査するために行う他のステップには何がありますか? </p>
+<p>この <strong>Security Hub</strong> のインサイトは、攻撃者が実行した可能性があることを明確にする 1 つの方法です。しかし、すべての状況で役に立つとは限りません。攻撃者が実行したことを調査するために行う他のステップには何がありますか?</p>
 <p><strong>機密データが含まれているかどうかの確認 (Macie)</strong></p>
 <p>ここまでで、攻撃者がシステムに侵入した方法と実行したことの概要がわかりました。前のステップで、<strong>threat-detection-wksp-</strong> で開始して <strong>-data</strong> で終了する S3 バケットに、グローバル読み取り権限を付与する ACL があることがわかりました。今度は、ビジネスにとって重要な機密データがいずれかのバケット (特にそのデータバケット) にあるかどうかを確認し、Macie アラートを詳しく調べます。</p>
 <ol>
@@ -972,14 +972,14 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <p>次は、どのような種類の機密データがそのバケットに存在するか確認しましょう。</p>
 </li>
 <li>
-<p>左のナビゲーションの <strong>Dashboard (ダッシュボード)</strong> をクリックします。次のデータ分類が表示されます。 
+<p>左のナビゲーションの <strong>Dashboard (ダッシュボード)</strong> をクリックします。次のデータ分類が表示されます。
     <img alt="Macie Classification" src="../images/03-macie-data.png" /></p>
 <div class="admonition info">
 <p class="admonition-title">リスクスライダーをスライドして、リスクレベルに基づいてデータ分類をフィルタできます。</p>
 </div>
 </li>
 <li>
-<p>リスクスライダーの上の <strong>S3 public objects and buckets (S3 パブリックオブジェクトとバケット)</strong> のアイコンをクリックします。アイコンは地球の形ですが、アイコンの上にマウスを重ねて正しいアイコンを見つけることもできます。 
+<p>リスクスライダーの上の <strong>S3 public objects and buckets (S3 パブリックオブジェクトとバケット)</strong> のアイコンをクリックします。アイコンは地球の形ですが、アイコンの上にマウスを重ねて正しいアイコンを見つけることもできます。
     <img alt="Public Objects Button" src="../images/03-macie-public-objects-button.png" /></p>
 </li>
 <li>
@@ -990,7 +990,7 @@ Filtering on the access key ID like you did previously earlier will only show yo
 </li>
 <li>
 <ol>
-<li>データのいずれかが暗号化を解除されているかどうかを確認します。 </li>
+<li>データのいずれかが暗号化を解除されているかどうかを確認します。</li>
 </ol>
 <div class="admonition question">
 <p class="admonition-title"><strong>Object encryption (オブジェクト暗号化)</strong> フィールドを探します。(青い棒の一部は暗号化がなしに設定されていることを示しますか?)</p>
@@ -1002,7 +1002,7 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <p>前のステップで、<strong>threat-detection-wksp-</strong> で開始して <strong>-data</strong> で終了する S3 バケットに機密データがあり、そのデータの一部が暗号化されていないことがわかりました。バケットがグローバル読み取り権限を付与することもわかりました。これらの問題を手動で修正する必要があります。  </p>
 <ol>
 <li>
-<p>AWS マネジメントコンソールの <a href="https://us-west-2.console.aws.amazon.com/s3/" target="_blank">Amazon S3</a> に移動します。 </p>
+<p>AWS マネジメントコンソールの <a href="https://us-west-2.console.aws.amazon.com/s3/" target="_blank">Amazon S3</a> に移動します。</p>
 <p>まず、アクセス許可を修正します。
 2.  <strong>threat-detection-wksp-</strong> で開始し <strong>-data</strong> で終了するバケットを見つけます。
 3.  <strong>Permissions (アクセス許可)</strong> タブをクリックしてから <strong>ACL Control List (ACL コントロールリスト)</strong> をクリックします。
@@ -1015,7 +1015,7 @@ Filtering on the access key ID like you did previously earlier will only show yo
 </div>
 </li>
 </ol>
-<p>おめでとうございます! インシデントを正常に修復し、環境をさらに堅牢にできました。これは言うまでもなくシミュレーションであり、短い時間内に対応機能のすべての側面を説明することはできませんが、脅威および攻撃を検知、調査、対応するために AWS で利用できる機能についてアイディアを提示できたと思います。 </p>
+<p>おめでとうございます! インシデントを正常に修復し、環境をさらに堅牢にできました。これは言うまでもなくシミュレーションであり、短い時間内に対応機能のすべての側面を説明することはできませんが、脅威および攻撃を検知、調査、対応するために AWS で利用できる機能についてアイディアを提示できたと思います。</p>
 <hr />
 <p>あなたが調査してきた攻撃の図を次に示します。数字の 1 と 2 は、SSH ブルートフォース攻撃と SSH ログインの成功を示してします。3 は、攻撃者が加えた S3 バケットの変更を示します。4 は、乗っ取られた EC2 インスタンスから盗まれた IAM 一時認証情報を使用して、攻撃者が実行した API 呼び出しを示します
 <img alt="03-diagram-attack" src="../images/03-diagram-attack.png" /></p>
