@@ -16,6 +16,7 @@ copyright: '&copy; 2019, Amazon Web Services, Inc. or its affiliates. All rights
 # Configuration
 theme:
   name: 'material'
+  language: 'ja'
   logo: 'assets/images/aws_smile_logo.png'
   favicon: 'assets/images/aws-favicon.ico'
   feature:
@@ -44,7 +45,7 @@ markdown_extensions:
 
 # Navigation
 nav:
-  - Overview: 'index.md'
+  - 概要: 'index.md'
   - 'モジュール 1: 環境構築と設定': '01-environment-setup.md'
   - 'モジュール 2: 攻撃シミュレーション': '02-attack-simulation.md'
   - 'モジュール 3: 検知、調査、および対応': '03-detection-and-remediation.md'
