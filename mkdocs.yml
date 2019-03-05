@@ -1,7 +1,7 @@
 # Project information
 
 site_name: AWS 環境における脅威検知と対応
-site_short_name: Scaling threat detection
+site_short_name: 環境における脅威検知と対応
 site_description: 'このワークショップは、AWS セキュリティサービスを理解し、そのサービスを使用して貴社環境の脅威を識別および修復する方法を学習する手助けとなるように設計されています。Amazon GuardDuty、Amazon Macie、Amazon Inspector、AWS Security Hub などのサービスを使用します。これらのサービスを使用して、攻撃中および攻撃後の脅威を調査し、通知と修復パイプラインを設定し、追加的な保護策を講じて、貴社環境のセキュリティを改善する方法を学習します。'
 site_author: 'aws-security-workshops@amazon.com'
 site_url: 'https://scaling-threat-detection.awssecworkshops.jp/'
