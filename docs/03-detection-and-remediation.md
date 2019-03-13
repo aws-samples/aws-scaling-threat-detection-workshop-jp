@@ -47,7 +47,7 @@ Outline for 03-detection-and-remediation.md
 
 1.  <a href="https://us-west-2.console.aws.amazon.com/guardduty/" target="_blank">Amazon GuardDuty</a> コンソール (us-west-2) に移動します。
 
-2.  **Add filter criteria (フィルタ基準の追加)** ボックスをクリックします。 **Access Key ID (アクセスキー ID)** を選択し、メールからコピーした `<Access Key ID>` を貼り付けます。
+2.  **Add filter criteria (フィルタ基準の追加)** ボックスをクリックします。 **Access Key ID (アクセスキー ID)** を選択し、メールからコピーした **`<Access Key ID>`** を貼り付けます。
 
     !!! question "このアクセスキー ID に関連してどのような検出結果がありますか?"
 
