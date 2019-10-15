@@ -155,22 +155,25 @@ curl http://169.254.169.254/latest/meta-data/iam/security-credentials/threat-det
 侵害された IAM 認証情報を調査して、それが EC2 の IAM ロールからであることがわかり、検出結果のプリンシパル ID から EC2 インスタンス ID を特定しました。このインスタンス ID を使用して、AWS Security Hub で検出結果の調査を開始できます。まず、EC2 インスタンスに関連する GuardDuty の検出結果を調査します。
 
 1. <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/findings" target="_blank">AWS Security Hub</a> コンソールに移動します。
-2.  リンクにより **Findings (検出結果)** セクションに移動しますが、移動しなかった場合は左のナビゲーションの **Findings (検出結果)** をクリックします。
-3.  **Add filter (フィルタの追加)** ボックスをクリックします。
+2.  **検出結果** セクションにいることを確認します。異なるセクションにいる場合は左のナビゲーションの**検出結果**をクリックします。
 
-	* **Resource ID (リソース ID)** にスクロールダウンし、演算子を **CONTAINS (含む)** に変更し、(GuardDuty の検出結果で収集したプリンシパル ID から) 前にコピーした <Instance ID> を貼り付けます。
-	* **Add filter (フィルタの追加)** ボックスをもう一度クリックして別のフィルタを追加し、**Product Name (製品名)** にスクロールダウンして GuardDuty と入力します。
+	* **フィルターの追加** をクリックし、下にスクロールして**製品名**のフィルターを追加し、`GuardDuty`を入力します。
+	* ブラウザの検索機能（**Control-F**）を使用して、先ほどコピーした`インスタンスID`（GuardDutyの検索結果で収集したプリンシパルIDからコピーしたもの）を検索します。
+	* 最初に一致する**リソースID**からAmazonリソースネーム（ARN）をコピーします。ARNは次のようになります`arn:aws:ec2:us-west-2:166199753942:instance/i-0efc5172a5d7ecc6b`
+	* **フィルターの追加** をもう一度クリックして**リソースID**を選択し、前の手順のARNに貼り付けて、フィルターをもう1つ追加します。
 
 	!!! question "このインスタンス ID に関連してどのような検出結果がありますか?"
 
 <!--
-1. Go to the [AWS Security Hub](https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2) console.
-2. On the left navigation, click on **Explore Findings**
-3. Add the following filter:
-	* **Keyword: `instance id`** (you obtained the instance ID earlier from the principal ID in one of the findings. The instance ID came from the session name of the principal ID.)
-	* **Provider: GuardDuty**
+1. Go to the <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/findings" target="_blank">AWS Security Hub</a> console.
+2. The link should take you to the **Findings** section (if not, click on **Findings** in the navigation on the left).
+	* Add a filter by clicking in the **Add filter** box and scrolling down to **Product Name**, and paste in the word `GuardDuty`.
+	* Use your browser's find function **Control-F** and paste in the `<Instance ID>` you copied earlier (from the principal ID you gathered in the GuardDuty finding). 
 
-	>  What findings do you see related to this Instance ID?
+    * Now copy the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html" target="_blank">Amazon Resource Name (ARN)</a> from the **Resource ID** for the first match. The ARN will look something like this `arn:aws:ec2:us-west-2:166199753942:instance/i-0efc5172a5d7ecc6b`
+
+    * Add one more filter by clicking the **Add filter** box again and selecting **Resource ID** and paste in the ARN from the previous step
+	!!! question "What GuardDuty findings do you see related to this instance ID?"
 -->
 
 検出結果の 1 つで、EC2 インスタンスが脅威リスト (**disallowed IP (許可されない IP)**) にある IP アドレスと通信していることが示され、インスタンスが侵害されたという結論が一層確かになります。他の検出結果では、特定の IP アドレスのシステムがインスタンスに対して SSH ブルートフォース攻撃を実行していることが示されています。今度は、SSH ブルートフォース攻撃が成功したかどうか、それによって攻撃者がインスタンスへのアクセスを取得できたかどうかを調査する必要があります。
@@ -180,9 +183,10 @@ curl http://169.254.169.254/latest/meta-data/iam/security-credentials/threat-det
 脅威に対する対応は、多くのことを自動化できます。たとえば、脅威に関する情報の収集に役立つトリガーを設定し、それをセキュリティチームが調査に使用することができます。そのオプションを考慮して、GuardDuty が特定の攻撃を検出したときに EC2 インスタンスの <a href="https://aws.amazon.com/inspector/" target="_blank">Amazon Inspector</a> スキャンをトリガーする CloudWatch イベントルールがあります。AWS Security Hub を使用して Inspector からの検出結果を表示します。SSH の構成がベストプラクティスに従っているかどうかを確認します。  
 
 1.  <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/findings" target="_blank">AWS Security Hub</a> コンソールに移動します。
-2.  リンクにより **Findings (検出結果)** セクションに移動しますが、移動しなかった場合は左のナビゲーションの **Findings (検出結果)** をクリックします。**Add filter (フィルタの追加)** ボックスをクリックします。
-
-	* **Title (タイトル)** にスクロールダウンし、演算子を **CONTAINS (含む)** に変更し、`password authentication over SSH`.
+2.  **検出結果** セクションにいることを確認します。異なるセクションにいる場合は左のナビゲーションの**検出結果**をクリックします。
+	* **フィルターの追加** をクリックし、下にスクロールして**製品名**のフィルターを追加し、`Inspector`を入力します。
+	* ブラウザの検索機能（**Control-F**）を使用して、`password authentication over SSH`を検索します。
+	* 最初のページに検索結果が一致しない場合は、`>`をクリックして次のページへ移動して検索してください。
 
 SSH に関連する検出結果、および SSH ブルートフォース攻撃を受けたインスタンスのパスワード認証に関連する検出結果があります。
 
