@@ -692,7 +692,7 @@ Outline for 03-detection-and-remediation.md
 <p><a href="https://us-west-2.console.aws.amazon.com/guardduty/" target="_blank">Amazon GuardDuty</a> コンソール (us-west-2) に移動します。</p>
 </li>
 <li>
-<p><strong>Add filter criteria (フィルタ基準の追加)</strong> ボックスをクリックします。 <strong>Access Key ID (アクセスキー ID)</strong> を選択し、メールからコピーした <Access Key ID> を貼り付けます。</p>
+<p><strong>Add filter criteria (フィルタ基準の追加)</strong> ボックスをクリックします。 <strong>Access Key ID (アクセスキー ID)</strong> を選択し、メールからコピーした <strong><code>&lt;Access Key ID&gt;</code></strong> を貼り付けます。</p>
 <div class="admonition question">
 <p class="admonition-title">このアクセスキー ID に関連してどのような検出結果がありますか?</p>
 </div>
@@ -704,13 +704,13 @@ Outline for 03-detection-and-remediation.md
 </div>
 </li>
 </ol>
-<p><strong>Resource affected (影響を受けるリソース)</strong> の下の <strong>User type (ユーザータイプ)</strong> を調べると、この検出結果で参照されているアクセスキーが IAM 引き受けロール(assumed role)からであるとわかります。<strong>Resource affected (影響を受けるリソース)</strong> の下の<strong>Principal ID (プリンシパル ID)</strong> を調べると、コロンで区切られた 2 つの文字列を確認できます。最初の文字列は IAM ロールの <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids" target="_blank">一意の ID</a> で、2 つ目の文字列は EC2 インスタンス ID です。<strong>Principal ID (プリンシパル ID)</strong> には、API リクエストを行ったエンティティの一意の ID が含まれ、一時セキュリティ認証情報を使用してリクエストを行った場合 (引き受けロール呼び出しの場合)、セッション名も含まれます。この場合、EC2 の .IAM ロールを使用して引き受けロール呼び出しが行われたため、セッション名は EC2 インスタンス ID となります。</p>
+<p><strong>Resource affected (影響のあるリソース)</strong> の下の <strong>User type (ユーザータイプ)</strong> を調べると、この検出結果で参照されているアクセスキーが IAM 引き受けロール(assumed role)からであるとわかります。<strong>Resource affected (影響のあるリソース)</strong> の下の<strong>Principal ID (プリンシパル ID)</strong> を調べると、コロンで区切られた 2 つの文字列を確認できます。最初の文字列は IAM ロールの <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids" target="_blank">一意の ID</a> で、2 つ目の文字列は EC2 インスタンス ID です。<strong>Principal ID (プリンシパル ID)</strong> には、API リクエストを行ったエンティティの一意の ID が含まれ、一時セキュリティ認証情報を使用してリクエストを行った場合 (引き受けロール呼び出しの場合)、セッション名も含まれます。この場合、EC2 の .IAM ロールを使用して引き受けロール呼び出しが行われたため、セッション名は EC2 インスタンス ID となります。</p>
 <ol>
 <li>
 <p>ロールの一意の ID とセッション名の両方を含む完全な <strong>Principal Id (プリンシパル ID)</strong> をコピーします。 <strong>"principalId": "<code>&lt; unique ID &gt;:&lt; session name &gt;</code>"</strong></p>
 </li>
 <li>
-<p><strong>Resource affected (影響を受けるリソース)</strong> の下の<strong>User name (ユーザー名)</strong> を調べます。API 呼び出しを行うために使用された一時認証情報が、IAM ロールがアタッチされた EC2 インスタンスからであるため、このユーザー名は、関係する IAM ロールの名前に対応します。</p>
+<p><strong>Resource affected (影響のあるリソース)</strong> の下の<strong>User name (ユーザー名)</strong> を調べます。API 呼び出しを行うために使用された一時認証情報が、IAM ロールがアタッチされた EC2 インスタンスからであるため、このユーザー名は、関係する IAM ロールの名前に対応します。</p>
 </li>
 </ol>
 <!--
@@ -814,12 +814,13 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <p>侵害された IAM 認証情報を調査して、それが EC2 の IAM ロールからであることがわかり、検出結果のプリンシパル ID から EC2 インスタンス ID を特定しました。このインスタンス ID を使用して、AWS Security Hub で検出結果の調査を開始できます。まず、EC2 インスタンスに関連する GuardDuty の検出結果を調査します。</p>
 <ol>
 <li><a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/findings" target="_blank">AWS Security Hub</a> コンソールに移動します。</li>
-<li>リンクにより <strong>Findings (検出結果)</strong> セクションに移動しますが、移動しなかった場合は左のナビゲーションの <strong>Findings (検出結果)</strong> をクリックします。</li>
 <li>
-<p><strong>Add filter (フィルタの追加)</strong> ボックスをクリックします。</p>
+<p><strong>検出結果</strong> セクションにいることを確認します。異なるセクションにいる場合は左のナビゲーションの<strong>検出結果</strong>をクリックします。</p>
 <ul>
-<li><strong>Resource ID (リソース ID)</strong> にスクロールダウンし、演算子を <strong>CONTAINS (含む)</strong> に変更し、(GuardDuty の検出結果で収集したプリンシパル ID から) 前にコピーした "i-"から始まるインスタンスID を貼り付けます。</li>
-<li><strong>Add filter (フィルタの追加)</strong> ボックスをもう一度クリックして別のフィルタを追加し、<strong>Product Name (製品名)</strong> にスクロールダウンして GuardDuty と入力します。</li>
+<li><strong>フィルターの追加</strong> をクリックし、下にスクロールして<strong>製品名</strong>のフィルターを追加し、<code>GuardDuty</code>を入力します。</li>
+<li>ブラウザの検索機能（<strong>Control-F</strong>）を使用して、先ほどコピーした<code>インスタンスID</code>（GuardDutyの検索結果で収集したプリンシパルIDからコピーしたもの）を検索します。</li>
+<li>最初に一致する<strong>リソースID</strong>からAmazonリソースネーム（ARN）をコピーします。ARNは次のようになります<code>arn:aws:ec2:us-west-2:166199753942:instance/i-0efc5172a5d7ecc6b</code></li>
+<li><strong>フィルターの追加</strong> をもう一度クリックして<strong>リソースID</strong>を選択し、前の手順のARNに貼り付けて、フィルターをもう1つ追加します。</li>
 </ul>
 <div class="admonition question">
 <p class="admonition-title">このインスタンス ID に関連してどのような検出結果がありますか?</p>
@@ -827,13 +828,15 @@ Filtering on the access key ID like you did previously earlier will only show yo
 </li>
 </ol>
 <!--
-1. Go to the [AWS Security Hub](https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2) console.
-2. On the left navigation, click on **Explore Findings**
-3. Add the following filter:
-    * **Keyword: `instance id`** (you obtained the instance ID earlier from the principal ID in one of the findings. The instance ID came from the session name of the principal ID.)
-    * **Provider: GuardDuty**
+1. Go to the <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/findings" target="_blank">AWS Security Hub</a> console.
+2. The link should take you to the **Findings** section (if not, click on **Findings** in the navigation on the left).
+    * Add a filter by clicking in the **Add filter** box and scrolling down to **Product Name**, and paste in the word `GuardDuty`.
+    * Use your browser's find function **Control-F** and paste in the `<Instance ID>` you copied earlier (from the principal ID you gathered in the GuardDuty finding).
 
-    >  What findings do you see related to this Instance ID?
+    * Now copy the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html" target="_blank">Amazon Resource Name (ARN)</a> from the **Resource ID** for the first match. The ARN will look something like this `arn:aws:ec2:us-west-2:166199753942:instance/i-0efc5172a5d7ecc6b`
+
+    * Add one more filter by clicking the **Add filter** box again and selecting **Resource ID** and paste in the ARN from the previous step
+    !!! question "What GuardDuty findings do you see related to this instance ID?"
 -->
 
 <p>検出結果の 1 つで、EC2 インスタンスが脅威リスト (<strong>disallowed IP (許可されない IP)</strong>) にある IP アドレスと通信していることが示され、インスタンスが侵害されたという結論が一層確かになります。他の検出結果では、特定の IP アドレスのシステムがインスタンスに対して SSH ブルートフォース攻撃を実行していることが示されています。今度は、SSH ブルートフォース攻撃が成功したかどうか、それによって攻撃者がインスタンスへのアクセスを取得できたかどうかを調査する必要があります。</p>
@@ -841,10 +844,10 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <p>脅威に対する対応は、多くのことを自動化できます。たとえば、脅威に関する情報の収集に役立つトリガーを設定し、それをセキュリティチームが調査に使用することができます。そのオプションを考慮して、GuardDuty が特定の攻撃を検出したときに EC2 インスタンスの <a href="https://aws.amazon.com/inspector/" target="_blank">Amazon Inspector</a> スキャンをトリガーする CloudWatch イベントルールがあります。AWS Security Hub を使用して Inspector からの検出結果を表示します。SSH の構成がベストプラクティスに従っているかどうかを確認します。  </p>
 <ol>
 <li><a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/findings" target="_blank">AWS Security Hub</a> コンソールに移動します。</li>
-<li>
-<p>リンクにより <strong>Findings (検出結果)</strong> セクションに移動しますが、移動しなかった場合は左のナビゲーションの <strong>Findings (検出結果)</strong> をクリックします。<strong>Add filter (フィルタの追加)</strong> ボックスをクリックします。</p>
-<ul>
-<li><strong>Title (タイトル)</strong> にスクロールダウンし、演算子を <strong>CONTAINS (含む)</strong> に変更し、<code>password authentication over SSH</code>.</li>
+<li><strong>検出結果</strong> セクションにいることを確認します。異なるセクションにいる場合は左のナビゲーションの<strong>検出結果</strong>をクリックします。<ul>
+<li><strong>フィルターの追加</strong> をクリックし、下にスクロールして<strong>製品名</strong>のフィルターを追加し、<code>Inspector</code>を入力します。</li>
+<li>ブラウザの検索機能（<strong>Control-F</strong>）を使用して、<code>password authentication over SSH</code>を検索します。</li>
+<li>最初のページに検索結果が一致しない場合は、<code>&gt;</code>をクリックして次のページへ移動して検索してください。</li>
 </ul>
 </li>
 </ol>
@@ -1005,8 +1008,8 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <p>AWS マネジメントコンソールの <a href="https://us-west-2.console.aws.amazon.com/s3/" target="_blank">Amazon S3</a> に移動します。</p>
 <p>まず、アクセス許可を修正します。
 2.  <strong>threat-detection-wksp-</strong> で開始し <strong>-data</strong> で終了するバケットを見つけます。
-3.  <strong>Permissions (アクセス権限)</strong> タブをクリックしてから <strong>ACL Control List (ACL コントロールリスト)</strong> をクリックします。
-4.  <strong>Public access (パブリックアクセス)</strong> の下で、<strong>Everyone (すべてのユーザー)</strong> の横にあるラジオボタンをクリックします。<strong>List objects (オブジェクトの一覧)</strong> の選択を解除して <strong>Save (保存)</strong> をクリックします。</p>
+3.  <strong>Permissions (アクセス許可)</strong> タブをクリックしてから <strong>ACL Control List (ACL コントロールリスト)</strong> をクリックします。
+4.  <strong>Public access (パブリックアクセス)</strong> の下で、<strong>Everyone (すべてのユーザー)</strong> の横にあるラジオボタンをクリックします。<strong>List objects (リストオブジェクト)</strong> の選択を解除して <strong>Save (保存)</strong> をクリックします。</p>
 <p>次は暗号化を修正する必要があります。
 5.  同じバケットで <strong>Properties (プロパティ)</strong> タブをクリックして <strong>Default encryption (デフォルトの暗号化)</strong> をクリックします。
 6.  暗号化を AWS-KMS に設定します。<strong>aws/s3</strong> キーを選択します。最後に <strong>Save (保存)</strong> をクリックします。</p>
