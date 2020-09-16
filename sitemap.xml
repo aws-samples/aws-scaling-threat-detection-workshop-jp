@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://scaling-threat-detection.awssecworkshops.jp/</loc>
-     <lastmod>2019-11-20</lastmod>
+     <lastmod>2020-09-16</lastmod>
      <changefreq>daily</changefreq>
-    </url>
-    <url>
+    </url><url>
      <loc>https://scaling-threat-detection.awssecworkshops.jp/01-environment-setup/</loc>
-     <lastmod>2019-11-20</lastmod>
+     <lastmod>2020-09-16</lastmod>
      <changefreq>daily</changefreq>
-    </url>
-    <url>
+    </url><url>
      <loc>https://scaling-threat-detection.awssecworkshops.jp/02-attack-simulation/</loc>
-     <lastmod>2019-11-20</lastmod>
+     <lastmod>2020-09-16</lastmod>
      <changefreq>daily</changefreq>
-    </url>
-    <url>
+    </url><url>
      <loc>https://scaling-threat-detection.awssecworkshops.jp/03-detection-and-remediation/</loc>
-     <lastmod>2019-11-20</lastmod>
+     <lastmod>2020-09-16</lastmod>
      <changefreq>daily</changefreq>
-    </url>
-    <url>
+    </url><url>
      <loc>https://scaling-threat-detection.awssecworkshops.jp/04-review-and-discussion/</loc>
-     <lastmod>2019-11-20</lastmod>
+     <lastmod>2020-09-16</lastmod>
      <changefreq>daily</changefreq>
-    </url>
-    <url>
+    </url><url>
      <loc>https://scaling-threat-detection.awssecworkshops.jp/contribute/</loc>
-     <lastmod>2019-11-20</lastmod>
+     <lastmod>2020-09-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
