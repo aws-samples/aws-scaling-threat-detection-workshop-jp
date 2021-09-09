@@ -11,11 +11,11 @@
 
 攻撃シミュレーションを開始するには、モジュール 2 の CloudFormation テンプレートを実行する必要があります。
 
-!!! info "CloudFormation Template実行する前に <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/blob/master/templates/02-attack-simulation.yml" target="_blank">こちら</a href>.もご確認ください"
+!!! info "CloudFormation Template実行する前に <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/blob/master/templates/02-attack-simulation-nom.yml" target="_blank">こちら</a href>.もご確認ください"
 
 リージョン| デプロイ
 ------|-----
-US West 2 (Oregon) | <a href="https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=ThreatDetectionWksp-Attacks&templateURL=https://s3-us-west-2.amazonaws.com/sa-security-specialist-workshops-us-west-2/threat-detect-workshop/staging/02-attack-simulation.yml" target="_blank">![Deploy Module 2 in us-west-2](./images/deploy-to-aws.png)</a>
+US West 2 (Oregon) | <a href="https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=ThreatDetectionWksp-Attacks&templateURL=https://s3-us-west-2.amazonaws.com/sa-security-specialist-workshops-us-west-2/threat-detect-workshop/staging/02-attack-simulation-nom.yml" target="_blank">![Deploy Module 2 in us-west-2](img3-2/deploy-to-aws.png)</a> 
 
 1.  上の **Deploy to AWS (AWS へのデプロイ)** ボタンをクリックします。これにより、テンプレートを実行するコンソールに自動的に移動します。   
 
